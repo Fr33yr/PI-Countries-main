@@ -1,2 +1,2 @@
-const { Activity } = require('./db.js');
+const { Activity } = require('../db.js');
 
