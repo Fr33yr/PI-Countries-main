@@ -1,27 +1,25 @@
 const { Country, Activity } = require('../db.js');
 const axios = require('axios')
 
-const getCountries = async (req, res) => {
+const getApiData = () => {
     axios.get('https://restcountries.com/v3/all')
-        .then(function (res) {
-            //const {name, cca3, flags, continents, subregion, area, population} = res
-            // res.map((e) =>(
-            //     Country.create({
-            //         id: e.cca3,
-            //         name: e.name.common,
-            //         images: e.flags,
-            //         continents: e.continents,
-            //         subregion: e.subregion,
-            //         area: e.area,
-            //         population: e.population
-            //     })
-            // ))
-            console.log(res[0].name)
-        })
-        .catch(function (error) {
-        console.log(error)
-        })
-        
+        .then(res => res.data.map(e =>
+            Country.create({
+                id: e.cca3,
+                name: e.name.common,
+                images: e.flags,
+                continents: e.continents,
+                capital: e.capital !== null ? e.capital : "No hay capital",
+                subregion: e.subregion,
+                area: e.area,
+                population: e.population
+            })
+        ))
+        .catch(err => console.log(err))
+}
+getApiData()
+
+const getCountries = async (req, res) => {
     try {
         const countries = await Country.findAll({
             include: Activity
@@ -46,4 +44,4 @@ const getCountry = async (req, res) => {
     }
 }
 
-module.exports = {getCountries, getCountry}
+module.exports = { getCountries, getCountry }
