@@ -8,9 +8,22 @@ module.exports = (sequelize) => {
             primaryKey: true,
             autoIncrement: true
         },
-        name: { type: DataTypes.STRING },
-        dificulty: { type: DataTypes.INTEGER },
-        duration: { type: DataTypes.INTEGER },
-        season: { type: DataTypes.ARRAY(Sequelize.STRING) }
+        name: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            unique: true
+        },
+        dificulty: { 
+            type: DataTypes.INTEGER,
+            allowNull: false
+        },
+        duration: { 
+            type: DataTypes.INTEGER,
+            allowNull: false
+        },
+        season: { 
+            type: DataTypes.ARRAY(Sequelize.STRING),
+            allowNull: false
+        }
     });
 }
