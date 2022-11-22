@@ -6,7 +6,7 @@ const getApiData = () => {
         .then(res => res.data.map(e =>
             Country.create({
                 id: e.cca3,
-                name: e.name.common,
+                name: e.name.common.toLowerCase(),
                 images: e.flags,
                 continents: e.continents,
                 capital: e.capital !== null ? e.capital : "No hay capital",
@@ -20,13 +20,28 @@ const getApiData = () => {
 getApiData()
 
 const getCountries = async (req, res) => {
+    const { name } = req.query
+    console.log(name);
     try {
-        const countries = await Country.findAll({
-            include: Activity
-        })
-        res.json(countries)
+        if (!name) {
+            const countries = await Country.findAll({
+                include: Activity
+            })
+            res.json(countries)
+        } else {
+            const countriesByName = await Country.findOne({
+                where: {
+                    name: name
+                },
+                include: Activity
+            })
+            if (!countriesByName) {
+                throw new Error('No hay paises con ese nombre')
+            }
+            res.json(countriesByName)
+        }
     } catch (error) {
-        return res.status(500).json({ message: error.message })
+        return res.status(404).json({ message: error.message })
     }
 }
 
