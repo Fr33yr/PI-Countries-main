@@ -8,7 +8,7 @@ const getApiData = () => {
                 id: e.cca3,
                 name: e.name.common.toLowerCase(),
                 images: e.flags,
-                continents: e.continents,
+                continent: e.continents[0].toLowerCase(),
                 capital: e.capital !== null ? e.capital : "No hay capital",
                 subregion: e.subregion,
                 area: e.area,
@@ -20,25 +20,31 @@ const getApiData = () => {
 getApiData()
 
 const getCountries = async (req, res) => {
-    const { name } = req.query
-    console.log(name);
+    const { name, continent } = req.query
+
     try {
-        if (!name) {
+        if (!name && !continent) {
             const countries = await Country.findAll({
                 include: Activity
             })
             res.json(countries)
         } else {
-            const countriesByName = await Country.findOne({
-                where: {
-                    name: name
-                },
+            const options = {
+                where: {}
+            }
+
+            if(!name){ options.where.continent = continent}
+            if(!continent){ options.where.name = name}
+            console.log(options)
+            const filteredCountries = await Country.findAll({
+                ...options,
                 include: Activity
             })
-            if (!countriesByName) {
+            if (filteredCountries.length <= 0) {
                 throw new Error('No hay paises con ese nombre')
             }
-            res.json(countriesByName)
+            res.json(filteredCountries)
+
         }
     } catch (error) {
         return res.status(404).json({ message: error.message })
@@ -59,4 +65,17 @@ const getCountry = async (req, res) => {
     }
 }
 
-module.exports = { getCountries, getCountry }
+const addActivity = async (req, res) => {
+    const { id } = req.params
+    try {
+        const country = await Country.findOne({
+            where: {
+                id
+            }
+        })
+    } catch (error) {
+
+    }
+}
+
+module.exports = { getCountries, getCountry, addActivity }
