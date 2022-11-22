@@ -13,7 +13,7 @@ module.exports = (sequelize) => {
       allowNull: false,
     },
     images: { type: DataTypes.ARRAY(Sequelize.STRING) },
-    continents: { type: DataTypes.ARRAY(Sequelize.STRING) },
+    continent: { type: DataTypes.STRING },
     subregion: { type: DataTypes.STRING },
     area: { type: DataTypes.FLOAT },
     population: { type: DataTypes.INTEGER }
