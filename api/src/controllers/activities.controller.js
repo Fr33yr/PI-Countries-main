@@ -8,8 +8,16 @@ const createActivity = async (req, res) => {
         }else if(!duration || !season){
             throw new Error('Este campo es requerido')
         }
-        const newActivity = await Activity.create({
-            name,
+        const activity = await Activity.findOne({
+            where:{
+                name
+            }
+        })
+        if(activity){
+            throw new Error('Ya existe una actividad con ese nombre')
+        }
+        await Activity.create({
+            name: name.toLowerCase(),
             dificulty,
             duration,
             season
