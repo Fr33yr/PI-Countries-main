@@ -35,7 +35,7 @@ const getCountries = async (req, res) => {
 
             if(!name){ options.where.continent = continent}
             if(!continent){ options.where.name = name}
-            console.log(options)
+            
             const filteredCountries = await Country.findAll({
                 ...options,
                 include: Activity
@@ -59,6 +59,7 @@ const getCountry = async (req, res) => {
                 id
             }
         })
+        if(!country) throw new Error('No se encontro un pais con ese id')
         res.json(country)
     } catch (error) {
         return res.status(500).json({ message: error.message })
