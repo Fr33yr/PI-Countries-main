@@ -1,5 +1,6 @@
 const { Country, Activity } = require('../db.js');
-const axios = require('axios')
+const axios = require('axios');
+const { Op } = require('sequelize');
 
 const getApiData = () => {
     axios.get('https://restcountries.com/v3/all')
@@ -20,7 +21,7 @@ const getApiData = () => {
 getApiData()
 
 const getCountries = async (req, res) => {
-    const { name, continent } = req.query
+    const { name } = req.query
     try {
         if (!name && !continent) {
             const countries = await Country.findAll({
@@ -28,22 +29,16 @@ const getCountries = async (req, res) => {
             })
             res.json(countries)
         } else {
-            const options = {
-                where: {}
-            }
-
-            if(!name){ options.where.continent = continent}
-            if(!continent){ options.where.name = name}
-            
             const filteredCountries = await Country.findAll({
-                ...options,
+                where: {
+                    name
+                },
                 include: Activity
             })
             if (filteredCountries.length <= 0) {
                 throw new Error('No hay paises con ese nombre')
             }
             res.json(filteredCountries)
-
         }
     } catch (error) {
         return res.status(404).json({ message: error.message })
