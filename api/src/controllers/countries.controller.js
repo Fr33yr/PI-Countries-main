@@ -67,15 +67,15 @@ const getCountry = async (req, res) => {
 }
 
 const addActivity = async (req, res) => {
-    const { id } = req.params
+    const { activityId, countryId } = req.body
     try {
-        const country = await Country.findOne({
-            where: {
-                id
-            }
-        })
-    } catch (error) {
+        const newActivity = await Activity.findByPk(activityId)
+        const country = await Country.findByPk(countryId)
 
+        country.addActivity(newActivity)
+        res.status(201).send({message: "Todo ok"})
+    } catch (error) {
+        res.status(500).json({error: error.message})
     }
 }
 

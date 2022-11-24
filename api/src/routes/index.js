@@ -11,8 +11,8 @@ const router = Router();
 
 // Countries routes
 router.get('/countries', getCountries)
+router.put('/countries', addActivity)
 router.get('/countries/:id', getCountry)
-router.put('/countries/:id', addActivity)
 // Activities routes
 router.post('/activities', createActivity)
 
