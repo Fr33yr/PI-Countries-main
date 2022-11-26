@@ -32,3 +32,5 @@ const getDetails = (id) => async dispatch => {
         console.log(error);
     }
 }
+
+export {getCountries, createActivity, getDetails}
