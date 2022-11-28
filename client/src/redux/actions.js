@@ -15,18 +15,26 @@ const createActivity = async (props) => {
     }
 }
 
-const getCountries = () => {
+const getCountries = (name) => {
     return async function (dispatch) {
-        const countries = await axios.get(`http://localhost:3001/countries/`)
-        return dispatch({
-            type: GET_COUNTRIES,
-            payload: countries.data
-        })
+        if (!name) {
+            const countries = await axios.get(`http://localhost:3001/countries/`)
+            return dispatch({
+                type: GET_COUNTRIES,
+                payload: countries.data
+            })
+        }else{
+            const countries = await axios.get(`http://localhost:3001/countries?name=${name}`)
+            return dispatch({
+                type: GET_COUNTRIES,
+                payload: countries.data
+            })
+        }
     }
 }
 
 const getDetails = (id) => {
-    return function (dispatch){
+    return function (dispatch) {
         axios.get(`http://localhost:3001/countries/${id}`)
             .then(res => res.data)
             .then(d => dispatch({
