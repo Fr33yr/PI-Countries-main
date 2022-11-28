@@ -4,8 +4,8 @@ const { Op } = require('sequelize');
 
 const getApiData = () => {
     axios.get('https://restcountries.com/v3/all')
-        .then(res => res.data.map(e =>
-            Country.create({
+        .then(res => Country.bulkCreate(res.data.map(e =>
+            ({
                 id: e.cca3,
                 name: e.name.common.toLowerCase(),
                 images: e.flags,
@@ -14,7 +14,7 @@ const getApiData = () => {
                 subregion: e.subregion,
                 area: e.area,
                 population: e.population
-            })
+            }))
         ))
         .catch(err => console.log(err))
 }
@@ -23,7 +23,7 @@ getApiData()
 const getCountries = async (req, res) => {
     const { name } = req.query
     try {
-        if (!name && !continent) {
+        if (!name) {
             const countries = await Country.findAll({
                 include: Activity
             })
