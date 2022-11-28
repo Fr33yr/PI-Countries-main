@@ -14,6 +14,7 @@ module.exports = (sequelize) => {
     },
     images: { type: DataTypes.ARRAY(Sequelize.STRING) },
     continent: { type: DataTypes.STRING },
+    capital: {type: DataTypes.STRING},
     subregion: { type: DataTypes.STRING },
     area: { type: DataTypes.FLOAT },
     population: { type: DataTypes.INTEGER }
