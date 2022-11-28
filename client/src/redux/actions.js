@@ -15,45 +15,26 @@ const createActivity = async (props) => {
     }
 }
 
-const getCountries = (countries) => {
-    return {
-        type: GET_COUNTRIES,
-        payload: countries
+const getCountries = () => {
+    return async function (dispatch) {
+        const countries = await axios.get(`http://localhost:3001/countries/`)
+        return dispatch({
+            type: GET_COUNTRIES,
+            payload: countries.data
+        })
     }
 }
 
-const getDetails = (details) => {
-    return {
-        type: GET_DETAILS,
-        payload: details
-    }
-}
-
-const fetchDetails = (id) => {
-    return function (dispatch) {
-        dispatch(getDetails())
+const getDetails = (id) => {
+    return function (dispatch){
         axios.get(`http://localhost:3001/countries/${id}`)
             .then(res => res.data)
-            .then(d => dispatch(getDetails(d)))
+            .then(d => dispatch({
+                type: GET_DETAILS,
+                payload: d
+            }))
             .catch(err => console.log(err))
     }
 }
 
-const fetchCountries = (name) => {
-    return function (dispatch) {
-        dispatch(getCountries())
-        if (!name) {
-            axios.get(`http://localhost:3001/countries/`)
-                .then(res => res.data)
-                .then(d => dispatch(getCountries(d)))
-                .catch(res => console.log(res))
-        } else {
-            axios.get(`http://localhost:3001/countries?name=${name}`)
-                .then(res => res.data)
-                .then(d => dispatch(getCountries(d)))
-                .catch(res => console.log(res))
-        }
-    }
-}
-
-export { getCountries, createActivity, getDetails, fetchDetails, fetchCountries }
+export { getCountries, createActivity, getDetails }
