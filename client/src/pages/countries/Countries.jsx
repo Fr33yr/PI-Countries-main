@@ -1,8 +1,9 @@
 import { useEffect } from 'react'
 import {useDispatch, useSelector} from 'react-redux'
-import './countries.module.css'
+import styles from './countries.module.css'
 
 import {getCountries} from '../../redux/actions'
+import Card from '../../components/card/Card'
 
 export default function Countries() {
     const dispatch = useDispatch()
@@ -15,7 +16,7 @@ export default function Countries() {
     countries && console.log(countries);
     return (
         <>
-            <div className="countries">
+            <div className={styles.countriescontainer}>
 
             </div>
         </>
