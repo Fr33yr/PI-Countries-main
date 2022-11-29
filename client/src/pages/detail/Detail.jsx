@@ -1,14 +1,14 @@
 import { useEffect } from 'react'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { useParams } from 'react-router-dom'
-
-import { fetchDetails } from '../../redux/actions'
+import { getDetails } from '../../redux/actions'
 
 export default function Detail() {
     const params = useParams()
+    const dispatch = useDispatch()
 
     useEffect(()=>{
-        fetchDetails(params.id)
+        dispatch(getDetails(params.id))
     },[])
 
     const countryDetails = useSelector(state => state.countryDetail)
