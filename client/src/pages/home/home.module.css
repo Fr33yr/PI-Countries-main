@@ -1,0 +1,18 @@
+.homecontainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100vh;
+    background-image: url('../../assets/countries.png');
+    background-size: cover;
+}
+.homelink{
+    color: var(--font-clr-primary);
+    letter-spacing: 1px;
+    font-size: var(--h2);
+    margin: 0 auto;
+}
+.hometitle{
+    color: red;
+    text-align: center;
+}

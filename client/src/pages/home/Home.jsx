@@ -1,22 +1,13 @@
-import React from 'react'
-import { useEffect } from 'react'
-import {useSelector} from 'react-redux'
-
-import {fetchCountries} from '../../redux/actions'
+import styles from './home.module.css'
+import { Link } from 'react-router-dom'
 
 export default function Home() {
 
-  const countries = useSelector(state => state.countries)
-
-  useEffect(()=>{
-    fetchCountries()
-  },[])
-
-  countries && console.log(countries);
-
   return (
     <>
-      <h1>Home</h1>
+      <div className={styles.homecontainer}>
+        <Link to={'/countries'} className={styles.homelink}>Countries</Link>
+      </div>
     </>
   )
 }
