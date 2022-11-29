@@ -31,7 +31,7 @@ const getCountries = async (req, res) => {
         } else {
             const filteredCountries = await Country.findAll({
                 where: {
-                    name
+                    name:{[Op.like]: `%${name}%`}
                 },
                 include: Activity
             })
