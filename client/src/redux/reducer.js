@@ -14,7 +14,7 @@ export default (state = initialState, action) => {
         case GET_COUNTRIES:
             return {
                 ...state,
-                countries: state.countries.concat(action.payload)
+                countries: [...action.payload]
             }
         case GET_DETAILS:
             return {
