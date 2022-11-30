@@ -1,3 +1,8 @@
-.form-activity{
-    border-radius: 4px;
+.activityform{
+    padding-top: 6rem;
+    max-width: 30rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0 auto;
 }
