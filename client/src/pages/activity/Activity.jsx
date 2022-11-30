@@ -1,6 +1,7 @@
 import { useState } from 'react'
-import './activity.module.css'
+import styles from './activity.module.css'
 import { seasons as seasonsNames } from '../../utils/seasons'
+import Checkbox from '../../components/checkbox/Checkbox'
 
 export default function Activity() {
     const [selectedSeason, setSelectedSeason] = useState({
@@ -28,17 +29,17 @@ export default function Activity() {
     const handleChange = (e) => {
         const name = e.target.name;
         const value = e.target.value;
-        setForm(values => ({...values, [name]: value}))
+        setForm(values => ({ ...values, [name]: value }))
     }
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        console.log({...form, ...selectedSeason})
+        console.log({ ...form, ...selectedSeason })
     }
 
     return (
         <>
-            <form className="activity-form" onSubmit={handleSubmit}>
+            <form className={styles.activityform} onSubmit={handleSubmit}>
                 <label>Nombre: </label>
                 <input type="text" name='name' value={form.name}
                     required onChange={handleChange} />
@@ -46,15 +47,11 @@ export default function Activity() {
                 <input type="number" min={1} max={5} name='dificulty' value={form.dificulty}
                     required onChange={handleChange} />
                 <label>Duracion: </label>
-                <input type="number" name='duration' value={form.duration} 
-                min={1} max={99} required onChange={handleChange} />
+                <input type="number" name='duration' value={form.duration}
+                    min={1} max={99} required onChange={handleChange} />
                 <label>Temporada: </label>
                 {seasonsNames.map((s, index) => (
-                    <>
-                        <label >{s}</label>
-                        <input type="checkbox" name="seasons"
-                            value={s} key={index} onChange={handleChecks} />
-                    </>
+                <Checkbox handleChecks={handleChecks} value={s} key={index}/>
                 ))}
                 <label>Paises</label>
                 <button type="submit">Crear</button>
