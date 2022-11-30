@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { GET_COUNTRIES, CREATE_ACTIVITY, GET_DETAILS } from './action.types'
+import { GET_COUNTRIES, CREATE_ACTIVITY, GET_DETAILS, ORDER_AZ, ORDER_ZA, ORDER_MIN_TO_MAX, ORDER_MAX_TO_MIN } from './action.types'
 
 const createActivity = async (props) => {
     return function (dispatch) {
@@ -23,7 +23,7 @@ const getCountries = (name) => {
                 type: GET_COUNTRIES,
                 payload: countries.data
             })
-        }else{
+        } else {
             const countries = await axios.get(`http://localhost:3001/countries?name=${name}`)
             return dispatch({
                 type: GET_COUNTRIES,
@@ -45,4 +45,17 @@ const getDetails = (id) => {
     }
 }
 
-export { getCountries, createActivity, getDetails }
+const orderBy = (order) => {
+    switch (order) {
+        case 'AZ':
+            return { type: ORDER_AZ }
+        case 'ZA':
+            return { type: ORDER_ZA }
+        case 'minMax':
+            return { type: ORDER_MIN_TO_MAX }
+        case 'maxMin':
+            return { type: ORDER_MAX_TO_MIN }
+    }
+}
+
+export { getCountries, createActivity, getDetails, orderBy }
