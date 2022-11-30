@@ -6,12 +6,12 @@ import { getDetails } from '../../redux/actions'
 export default function Detail() {
     const params = useParams()
     const dispatch = useDispatch()
+    const countryDetails = useSelector(state => state.countryDetail)
 
     useEffect(()=>{
         dispatch(getDetails(params.id))
     },[])
 
-    const countryDetails = useSelector(state => state.countryDetail)
     countryDetails && console.log(countryDetails)
 
     return (

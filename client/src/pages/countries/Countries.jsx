@@ -13,7 +13,7 @@ export default function Countries() {
       dispatch(getCountries())
     }, [])
   
-    countries && console.log(countries);
+    countries.length > 0 && console.log(countries);
     return (
         <>
             <div className={styles.countriescontainer}>
