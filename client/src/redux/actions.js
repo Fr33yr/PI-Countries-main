@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { GET_COUNTRIES, CREATE_ACTIVITY, GET_DETAILS, ORDER_AZ, ORDER_ZA, ORDER_MIN_TO_MAX, ORDER_MAX_TO_MIN } from './action.types'
+import { GET_COUNTRIES, CREATE_ACTIVITY, GET_DETAILS, ORDER_AZ, ORDER_ZA, ORDER_MIN_TO_MAX, ORDER_MAX_TO_MIN, FILTER_BY_CONTINENT, FILTER_BY_ACTIVITY } from './action.types'
 
 const createActivity = async (props) => {
     return function (dispatch) {
@@ -45,7 +45,7 @@ const getDetails = (id) => {
     }
 }
 
-const orderBy = (order) => {
+const sortBy = (order) => {
     switch (order) {
         case 'AZ':
             return { type: ORDER_AZ }
@@ -58,4 +58,25 @@ const orderBy = (order) => {
     }
 }
 
-export { getCountries, createActivity, getDetails, orderBy }
+const filterBy = (continent, activity) => {
+    if (continent && activity) { 
+        return{
+            type: `${FILTER_BY_CONTINENT+FILTER_BY_ACTIVITY}`,
+            payload: {continent, activity}
+        }
+    }
+    if (!activity) {
+        return{
+            type: FILTER_BY_CONTINENT,
+            payload: continent
+        }
+    }
+    if (!continent) { 
+        return{
+            type: FILTER_BY_ACTIVITY,
+            payload: activity
+        }
+    }
+}
+
+export { getCountries, createActivity, getDetails, sortBy, filterBy }
