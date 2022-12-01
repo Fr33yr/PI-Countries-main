@@ -1,0 +1,1 @@
+export const continents = ["africa", "south america", "north america", "asia", "antarctica", "europe", "oceania"]
