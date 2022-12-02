@@ -1,0 +1,1 @@
+export const sortfilters = ['AZ', 'ZA', 'maxMin', 'minMax']
