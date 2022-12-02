@@ -1,3 +1,15 @@
-.countriescontainer{
-    
+.filters{
+    max-width: 22rem;
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+}
+
+.filters form select{
+    margin: .5rem .3rem;
+}
+.sortbuttons button{
+    border-radius: 2px;
+    border: none;
+    margin: 0 .2rem;
 }
