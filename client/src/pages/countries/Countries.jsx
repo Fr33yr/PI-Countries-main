@@ -7,18 +7,27 @@ import { getCountries } from '../../redux/actions'
 import Card from '../../components/card/Card'
 import { continents } from '../../utils/continents'
 import { sortfilters } from '../../utils/sortfilters'
+import { chunkArray } from '../../utils/chunker'
+
 
 export default function Countries() {
     const dispatch = useDispatch()
-    const [filterCountries, setFilterCountries] = useState([])
-    const [search, setSearch] = useState('')
     const countries = useSelector(state => state.countries)
+    const [search, setSearch] = useState('')
+    const [filterCountries, setFilterCountries] = useState([])
+    const [page, setPage] = useState(0)
+
+
 
     useEffect(() => {
         dispatch(getCountries())
         filterCountries.length > 0 ? "" : setFilterCountries(countries)
-        filterCountries.length > 0 && console.log(filterCountries)
+
     }, [filterCountries])
+
+    const ITEMS_PER_PAGE = 10
+    let chunks = chunkArray(filterCountries, ITEMS_PER_PAGE)
+    chunks && console.log(chunks[page])
 
     const handleFilter = (e) => {
         const { value } = e.target
@@ -73,6 +82,14 @@ export default function Countries() {
         dispatch(getCountries(search))
     }
 
+    const nextHandler = () => {
+        setPage(page + 1)
+    }
+
+    const prevHandler = () => {
+        setPage(page - 1)
+    }
+
     return (
         <>
             <div className={styles.filters}>
@@ -92,7 +109,12 @@ export default function Countries() {
                 </form>
             </div>
             <div className={styles.countriescontainer}>
-
+                {chunks[page] && chunks[page].map((item) => <Card {...item} key={item.id}/>)}
+            </div>
+            <div className={styles.paginationbuttons}>
+                <button onClick={prevHandler} disabled={page === 0}>Prev</button>
+                {/* pag numbers */}
+                <button onClick={nextHandler} disabled={page === chunks.length - 1}>Next</button>
             </div>
         </>
     )
