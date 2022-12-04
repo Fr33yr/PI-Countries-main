@@ -3,6 +3,7 @@ const {Op} = require('sequelize')
 
 const createActivity = async (req, res) => {
     const { name, dificulty, duration, season, countriesIds } = req.body
+    console.log(countriesIds)
     try {
         if(!name || !dificulty || !duration || !season){
             throw new Error('Este campo es requerido')

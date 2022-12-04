@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import styles from './activity.module.css'
 import { seasons as seasonsNames } from '../../utils/seasons'
 import Checkbox from '../../components/checkbox/Checkbox'
-import { getCountries } from '../../redux/actions'
+import { getCountries, createActivity } from '../../redux/actions'
 
 export default function Activity() {
     const [selectedSeason, setSelectedSeason] = useState({
@@ -11,7 +11,7 @@ export default function Activity() {
     })
     const [form, setForm] = useState({})
     const [search, setSearch] = useState('')
-    const [countriesNames, setCountriesNames] = useState([])
+    const [countriesIds, setCountriesIds] = useState([])
     const dispatch = useDispatch()
     const countries = useSelector(state => state.countries)
 
@@ -42,57 +42,57 @@ export default function Activity() {
         setForm(values => ({ ...values, [name]: value }))
     }
 
-
-    const handleSubmit = (e) => {
-        e.preventDefault()
-        console.log({ ...form, ...selectedSeason })
-    }
-
-
     const handleSearch = (e) => {
         e.preventDefault()
         search === "" ? [] : dispatch(getCountries(search))
     }
 
     const handleAddCountry = (name) => {
-        setCountriesNames(countriesNames.concat([name]))
+        setCountriesIds(countriesIds.concat([name]))
+    }
+
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        console.log({ ...form, season: selectedSeason, countriesIds: countriesIds })
+        dispatch(createActivity({ ...form, season: selectedSeason.seasons, countriesIds: countriesIds }))
     }
 
     return (
         <>
-            <form className={styles.activityform} onSubmit={handleSubmit}>
-                <label>Nombre: </label>
-                <input type="text" name='name' value={form.name}
-                    required onChange={handleChange} />
-                <label>Dificultad: </label>
-                <input type="number" min={1} max={5} name='dificulty' value={form.dificulty}
-                    required onChange={handleChange} />
-                <label>Duracion: </label>
-                <input type="number" name='duration' value={form.duration}
-                    min={1} max={99} required onChange={handleChange} />
-                <label>Temporada: </label>
-                {seasonsNames.map((s, index) => (
-                    <Checkbox handleChecks={handleChecks} value={s} key={index} />
-                ))}
-                <label>Paises</label>
-                <button type="submit">Crear</button>
-            </form>
-
-            <div className="searchcontainer">
-                <form onSubmit={handleSearch}>
-                    <input type="text" onChange={(e) => setSearch(e.target.value)} />
-                    <button type="submit" disabled={search === ""}>Find</button>
+            <div className={styles.activities}>
+                <form className={styles.activityform} onSubmit={handleSubmit}>
+                    <label>Nombre: </label>
+                    <input type="text" name='name' value={form.name}
+                        required onChange={handleChange} />
+                    <label>Dificultad: </label>
+                    <input type="number" min={1} max={5} name='dificulty' value={form.dificulty}
+                        required onChange={handleChange} />
+                    <label>Duracion: </label>
+                    <input type="number" name='duration' value={form.duration}
+                        min={1} max={99} required onChange={handleChange} />
+                    <label>Temporada: </label>
+                    {seasonsNames.map((s, index) => (
+                        <Checkbox handleChecks={handleChecks} value={s} key={index} />
+                    ))}
+                    <button type="submit">Crear</button>
                 </form>
-                <div className="searchview">
-                    {
-                        countries.length > 0 && countries.map((c, index) => (
-                            <div className={styles.searchresult}>
-                                <p>{c.name}</p>
-                                <button onClick={()=>handleAddCountry(c.name)}
-                                disabled={countriesNames.includes(c.name)}>+</button>
-                            </div>
-                        ))
-                    }
+
+                <div className="searchcontainer">
+                    <form onSubmit={handleSearch}>
+                        <input type="text" onChange={(e) => setSearch(e.target.value)} />
+                        <button type="submit" disabled={search === ""}>Find</button>
+                    </form>
+                    <div className="searchview">
+                        {
+                            countries.length > 0 && countries.map((c, index) => (
+                                <div className={styles.searchresult}>
+                                    <p>{c.name}</p>
+                                    <button onClick={() => handleAddCountry(c.id)}
+                                        disabled={countriesIds.includes(c.id)}>+</button>
+                                </div>
+                            ))
+                        }
+                    </div>
                 </div>
             </div>
         </>

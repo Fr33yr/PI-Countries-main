@@ -1,11 +1,11 @@
 import axios from 'axios'
 import { GET_COUNTRIES, CREATE_ACTIVITY, GET_DETAILS, ORDER_AZ, ORDER_ZA, ORDER_MIN_TO_MAX, ORDER_MAX_TO_MIN, FILTER_BY_CONTINENT, FILTER_BY_ACTIVITY } from './action.types'
 
-const createActivity = async (props) => {
-    return function (dispatch) {
-        const { name, dificulty, duration, season } = props
+const createActivity = (props) => {
+    return async function (dispatch) {
+        const { name, dificulty, duration, season, countriesIds } = props
         axios.post(`http://localhost:3001/activities`, {
-            name, dificulty, duration, season
+            name, dificulty, duration, season: season, countriesIds
         }).then(function (response) {
             dispatch({ type: CREATE_ACTIVITY, payload: props })
         })
