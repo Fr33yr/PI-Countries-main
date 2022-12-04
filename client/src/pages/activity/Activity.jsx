@@ -18,6 +18,10 @@ export default function Activity() {
 
 
 
+    useEffect(()=>{
+        dispatch(getCountries(search))
+    },[search])
+
     const handleChecks = (e) => {
         const { value, checked } = e.target
         const { seasons } = selectedSeason
@@ -84,7 +88,7 @@ export default function Activity() {
                     </form>
                     <div className="searchview">
                         {
-                            countries.length > 0 && countries.map((c, index) => (
+                            search !== '' && countries.length > 0 && countries.map((c, index) => (
                                 <div className={styles.searchresult}>
                                     <p>{c.name}</p>
                                     <button onClick={() => handleAddCountry(c.id)}
