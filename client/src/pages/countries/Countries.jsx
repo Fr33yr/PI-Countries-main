@@ -16,18 +16,19 @@ export default function Countries() {
     const [search, setSearch] = useState('')
     const [filterCountries, setFilterCountries] = useState([])
     const [page, setPage] = useState(0)
+    const [chunks, setChunks] = useState([])
 
 
+    const ITEMS_PER_PAGE = 10
 
     useEffect(() => {
         dispatch(getCountries())
         filterCountries.length > 0 ? "" : setFilterCountries(countries)
-
+        filterCountries.length > 0 && console.log(filterCountries)
+        setChunks(chunkArray(filterCountries, ITEMS_PER_PAGE))
+        //chunks && console.log(chunks)
     }, [filterCountries])
 
-    const ITEMS_PER_PAGE = 10
-    let chunks = chunkArray(filterCountries, ITEMS_PER_PAGE)
-    chunks && console.log(chunks[page])
 
     const handleFilter = (e) => {
         const { value } = e.target
@@ -62,12 +63,12 @@ export default function Countries() {
             })))
         }
         else if (value === "maxMin") {
-            console.log(filterCountries)
-            setFilterCountries(filterCountries.sort(function (a, b) { return b.population - a.population }))
+            const sorted = filterCountries.sort(function (a, b) { return b.population - a.population })
+            setFilterCountries(sorted)
         }
         else if (value === "minMax") {
-            console.log(filterCountries)
-            setFilterCountries(filterCountries.sort(function (a, b) { return a.population - b.population }))
+            const sorted = filterCountries.sort(function (a, b) { return a.population - b.population })
+            setFilterCountries(sorted)
         } else {
             setFilterCountries(filterCountries)
         }
