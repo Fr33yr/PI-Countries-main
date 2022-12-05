@@ -18,9 +18,9 @@ export default function Activity() {
 
 
 
-    useEffect(()=>{
+    useEffect(() => {
         dispatch(getCountries(search))
-    },[search])
+    }, [search])
 
     const handleChecks = (e) => {
         const { value, checked } = e.target
@@ -57,8 +57,11 @@ export default function Activity() {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        console.log({ ...form, season: selectedSeason, countriesIds: countriesIds })
-        dispatch(createActivity({ ...form, season: selectedSeason.seasons, countriesIds: countriesIds }))
+        dispatch(createActivity({
+            ...form,
+            season: selectedSeason.seasons,
+            countriesIds: countriesIds
+        }))
     }
 
     return (
