@@ -13,7 +13,7 @@ import { chunkArray } from '../../utils/chunker'
 export default function Countries() {
     const dispatch = useDispatch()
     const countries = useSelector(state => state.countries)
-    const [search, setSearch] = useState('')
+    const [search, setSearch] = useState({})
     const [filterCountries, setFilterCountries] = useState([])
     const [page, setPage] = useState(0)
     const [chunks, setChunks] = useState([])
@@ -22,65 +22,32 @@ export default function Countries() {
     const ITEMS_PER_PAGE = 10
 
     useEffect(() => {
-        dispatch(getCountries())
+        dispatch(getCountries(search.name))
         filterCountries.length > 0 ? "" : setFilterCountries(countries)
-        filterCountries.length > 0 && console.log(filterCountries)
-        setChunks(chunkArray(filterCountries, ITEMS_PER_PAGE))
+
+        //setChunks(chunkArray(filterCountries, ITEMS_PER_PAGE))
         //chunks && console.log(chunks)
-    }, [filterCountries])
+        
+        console.log(search);
+        filterCountries.length > 0 && console.log(filterCountries)
+    }, [search])
 
-
-    const handleFilter = (e) => {
-        const { value } = e.target
-        if (value === 'all') { setFilterCountries(countries) }
-        else {
-            setFilterCountries(countries.filter(c => c.continent === value))
-        }
+    const sortChangeHandler = (e) =>{
+        setSearch({...search, sort: e.target.value})
     }
 
-    const handleSort = (e) => {
-        const { value } = e.target
-        if (value === "AZ") {
-            setFilterCountries(filterCountries.sort((function (a, b) {
-                if (a.name < b.name) {
-                    return -1;
-                }
-                if (a.name > b.name) {
-                    return 1;
-                }
-                return 0;
-            })))
-        }
-        else if (value === "ZA") {
-            setFilterCountries(filterCountries.sort((function (a, b) {
-                if (a.name > b.name) {
-                    return -1;
-                }
-                if (a.name < b.name) {
-                    return 1;
-                }
-                return 0;
-            })))
-        }
-        else if (value === "maxMin") {
-            const sorted = filterCountries.sort(function (a, b) { return b.population - a.population })
-            setFilterCountries(sorted)
-        }
-        else if (value === "minMax") {
-            const sorted = filterCountries.sort(function (a, b) { return a.population - b.population })
-            setFilterCountries(sorted)
-        } else {
-            setFilterCountries(filterCountries)
-        }
+    const continentsChangeHandler = (e) =>{
+        setSearch({...search, continents: e.target.value})
     }
 
-    const handleSearch = (e) => {
-        setSearch(e.target.value)
+    const nameChangeHandler = (e) =>{
+        setSearch({...search, name: e.target.value})
     }
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        dispatch(getCountries(search))
+        //dispatch(getCountries(search))
+        console.log(search)
     }
 
     const nextHandler = () => {
@@ -94,23 +61,25 @@ export default function Countries() {
     return (
         <>
             <div className={styles.filters}>
-                <select onChange={handleFilter}>
-                    {continents.map((c, index) => {
-                        return (<option value={c} key={index} defaultValue={"all"}>{c}</option>)
-                    })}
-                </select>
-                <select onChange={handleSort}>
-                    {sortfilters.map((s, index) => {
-                        return (<option value={s} key={index + 1} defaultValue={"AZ"}>{s}</option>)
-                    })}
-                </select>
                 <form onSubmit={handleSubmit}>
-                    <input type="text" onChange={handleSearch} />
+                    <select onChange={continentsChangeHandler}>
+                        {continents.map((c, index) => {
+                            return (<option name="continent" 
+                            value={c} key={index} >{c}</option>)
+                        })}
+                    </select>
+                    <select onChange={sortChangeHandler}>
+                        {sortfilters.map((s, index) => {
+                            return (<option name="sort" 
+                            value={s} key={index + 1} >{s}</option>)
+                        })}
+                    </select>
+                    <input type="text" onChange={nameChangeHandler} name="name" />
                     <button type="submit">Buscar</button>
                 </form>
             </div>
             <div className={styles.countriescontainer}>
-                {chunks[page] && chunks[page].map((item) => <Card {...item} key={item.id}/>)}
+                {chunks[page] && chunks[page].map((item) => <Card {...item} key={item.id} />)}
             </div>
             <div className={styles.paginationbuttons}>
                 <button onClick={prevHandler} disabled={page === 0}>Prev</button>
