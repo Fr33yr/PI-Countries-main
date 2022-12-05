@@ -31,6 +31,9 @@ body {
 main{
   padding-top: 4rem;
   min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 a {

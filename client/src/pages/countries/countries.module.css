@@ -13,3 +13,16 @@
     border: none;
     margin: 0 .2rem;
 }
+
+.countriescontainer{
+    margin: 4rem 0;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    justify-items: center;
+    gap: 12rem;
+}
+
+.paginationbuttons{
+    position: relative;
+    margin-bottom: 2rem;
+}
