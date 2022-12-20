@@ -36,7 +36,9 @@ export default (state = initialState, action) => {
             if (action.payload !== 'filterBy:') {
                 return {
                     ...state,
-                    filteredCountries: state.filteredCountries.slice().filter(country => country.contient === action.payload)
+                    filteredCountries: state.filteredCountries.slice().filter(
+                        country => country.contient === action.payload
+                    )
                 }
             } else {
                 return {
