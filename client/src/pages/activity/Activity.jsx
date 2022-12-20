@@ -1,8 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import styles from './activity.module.css'
-import { seasons as seasonsNames } from '../../utils/seasons'
-import Checkbox from '../../components/checkbox/Checkbox'
 import { getCountries, createActivity } from '../../redux/actions'
 
 export default function Activity() {
@@ -78,9 +76,7 @@ export default function Activity() {
                     <input type="number" name='duration' value={form.duration}
                         min={1} max={99} required onChange={handleChange} />
                     <label>Temporada: </label>
-                    {seasonsNames.map((s, index) => (
-                        <Checkbox handleChecks={handleChecks} value={s} key={index} />
-                    ))}
+                    
                     <button type="submit">Crear</button>
                 </form>
 
