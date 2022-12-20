@@ -1,6 +1,4 @@
-import Home from './home/Home'
-import Detail from './detail/Detail'
-import Activity from './activity/Activity'
-import Countries from './countries/Countries'
-
-export {Home, Detail, Activity, Countries}
+export { default as Activity } from './activity/Activity';
+export { default as Countries } from './countries/Countries';
+export { default as Detail } from './detail/Detail';
+export { default as Home } from './home/Home';
