@@ -29,7 +29,7 @@ export default (state = initialState, action) => {
                 activity: action.payload
             }
         case SORTING:
-            if (action.payload === 'A to Z' || action.payload === 'az') {
+            if (action.payload === 'Z to A' || action.payload === 'za') {
                 return {
                     ...state,
                     filteredCountries: state.filteredCountries.slice().sort(function (a, b) {
@@ -60,13 +60,17 @@ export default (state = initialState, action) => {
             else if (action.payload === 'morePopulation') {
                 return{
                     ...state,
-                    filteredCountries: state.filteredCountries.slice().sort(function(a, b){return a - b})
+                    filteredCountries: state.filteredCountries.slice().sort(function(a, b){
+                        return b.population - a.population
+                    })
                 }
             }
             else if (action.payload === 'lessPopulation') {
                 return{
                     ...state,
-                    filteredCountries: state.filteredCountries.slice().sort(function(a, b){return b - a})
+                    filteredCountries: state.filteredCountries.slice().sort(function(a, b){
+                        return a.population - b.population
+                    })
                 }
             }
         default:
