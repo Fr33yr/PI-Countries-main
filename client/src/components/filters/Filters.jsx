@@ -1,7 +1,7 @@
+import styles from './filters.module.css'
 import { useDispatch } from 'react-redux'
 
 import { sortBy } from '../../redux/actions'
-import styles from './filters.module.css'
 
 function Filters() {
     const dispatch = useDispatch()
