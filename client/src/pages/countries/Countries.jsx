@@ -7,12 +7,28 @@ import {Filters, Card} from '../../components/index'
 
 
 export default function Countries() {
+    const [name, setName] = useState('')
+    const dispatch = useDispatch()
+
+    useEffect(()=>{
+        if(name !== undefined || name !== ''){
+            dispatch(getCountries(name))
+        }else{
+            dispatch(getCountries())
+        }
+    },[name])
+
+    //selectors
+    const filteredCountries = useSelector(state => state.filteredCountries)
 
     return (
         <>
-            <Filters/>
-            <div className={styles.cardscontainer}>
-            
+            <Filters name={name} setName={setName}/>
+            <div className={styles.countriescontainer}>
+                {filteredCountries.length > 0 &&
+                filteredCountries.map((item) => (
+                    <Card {...item} key={item.id}/>
+                ))}
             </div>
         </>
     )
