@@ -1,9 +1,15 @@
 import axios from 'axios'
-import { GET_COUNTRIES, CREATE_ACTIVITY, GET_DETAILS, ORDER_AZ, ORDER_ZA, ORDER_MIN_TO_MAX, ORDER_MAX_TO_MIN, FILTER_BY_CONTINENT, FILTER_BY_ACTIVITY } from './action.types'
+import {
+    GET_COUNTRIES,
+    CREATE_ACTIVITY,
+    GET_DETAILS, FILTER_BY_CONTINENT,
+    FILTER_BY_ACTIVITY, SORTING
+} from './action.types'
 
 const createActivity = (props) => {
     return async function (dispatch) {
         const { name, dificulty, duration, season, countriesIds } = props
+
         axios.post(`http://localhost:3001/activities`, {
             name, dificulty, duration, season: season, countriesIds
         }).then(function (response) {
@@ -45,34 +51,28 @@ const getDetails = (id) => {
     }
 }
 
-const sortBy = (order) => {
-    switch (order) {
-        case 'AZ':
-            return { type: ORDER_AZ }
-        case 'ZA':
-            return { type: ORDER_ZA }
-        case 'minMax':
-            return { type: ORDER_MIN_TO_MAX }
-        case 'maxMin':
-            return { type: ORDER_MAX_TO_MIN }
+const sortBy = (payload) => {
+    return {
+        type: SORTING,
+        payload
     }
 }
 
 const filterBy = (continent, activity) => {
-    if (continent && activity) { 
-        return{
-            type: `${FILTER_BY_CONTINENT+FILTER_BY_ACTIVITY}`,
-            payload: {continent, activity}
+    if (continent && activity) {
+        return {
+            type: `${FILTER_BY_CONTINENT + FILTER_BY_ACTIVITY}`,
+            payload: { continent, activity }
         }
     }
     if (!activity) {
-        return{
+        return {
             type: FILTER_BY_CONTINENT,
             payload: continent
         }
     }
-    if (!continent) { 
-        return{
+    if (!continent) {
+        return {
             type: FILTER_BY_ACTIVITY,
             payload: activity
         }
