@@ -1,18 +1,33 @@
 import styles from './filters.module.css'
 import { useDispatch } from 'react-redux'
 
-import { sortBy } from '../../redux/actions'
+import { sortBy, filterBy } from '../../redux/actions'
+import {continents} from '../../utils/continents'
 
-function Filters() {
+function Filters({name, setName}) {
     const dispatch = useDispatch()
 
     const handleSort = (e) => {
         dispatch(sortBy(e.target.value))
     }
 
+    const handleFilterByContinent = (e) => {
+        dispatch(filterBy(e.target.value, null))
+    }
+
+    const handleName = (e) => {
+        setName(e.target.value)
+    }
+
     return (
         <>
             <div className={styles.filters}>
+                <input type="text" name="name" onChange={handleName}/>
+                <select name="contients" onChange={handleFilterByContinent}>
+                    {continents.map((c,index) => (
+                        <option value={c} key={index}>{c}</option>
+                    ))}
+                </select>
                 <fieldset onChange={handleSort}>
                     <label htmlFor="A to Z">A to Z</label>
                     <input type="radio" name="sort" value={'A to Z'} />
