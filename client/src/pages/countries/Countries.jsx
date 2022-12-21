@@ -10,25 +10,28 @@ export default function Countries() {
     const [name, setName] = useState('')
     const dispatch = useDispatch()
 
+    
+    //selectors
+    const filteredCountries = useSelector(state => state.filteredCountries)
+    const countries = useSelector(state => state.countries)
+
     useEffect(()=>{
-        if(name !== undefined || name !== ''){
-            dispatch(getCountries(name))
-        }else{
-            dispatch(getCountries())
+        if(!countries || countries.length <= 0){
+            if(name !== undefined || name !== ''){
+                dispatch(getCountries(name))
+            }else{
+                dispatch(getCountries())
+            }
         }
     },[name])
 
-    //selectors
-    const filteredCountries = useSelector(state => state.filteredCountries)
+
     
     return (
         <>
             <Filters name={name} setName={setName}/>
             <div className={styles.countriescontainer}>
-                {filteredCountries.length > 0 &&
-                filteredCountries.map((item,index) => (
-                    <Card {...item} key={index+item.id}/>
-                ))}
+                {}
             </div>
         </>
     )
