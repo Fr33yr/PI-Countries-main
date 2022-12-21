@@ -31,7 +31,10 @@ export default function Countries() {
         <>
             <Filters name={name} setName={setName}/>
             <div className={styles.countriescontainer}>
-                {}
+                {filteredCountries.length > 0 &&
+                filteredCountries.map((item,index) => (
+                    <Card {...item} key={item.id}/>
+                ))}
             </div>
         </>
     )
