@@ -6,12 +6,14 @@ import {
     FILTER_BY_ACTIVITY, SORTING
 } from './action.types'
 
+
+// Activities actions
 const createActivity = (props) => {
     return async function (dispatch) {
         const { name, dificulty, duration, season, countriesIds } = props
 
         axios.post(`http://localhost:3001/activities`, {
-            name, dificulty, duration, season: season, countriesIds
+            name, dificulty, duration, season, countriesIds
         }).then(function (response) {
             dispatch({ type: CREATE_ACTIVITY, payload: props })
         })
@@ -21,6 +23,7 @@ const createActivity = (props) => {
     }
 }
 
+// Countries actions
 const getCountries = (name) => {
     return async function (dispatch) {
         if (!name) {
