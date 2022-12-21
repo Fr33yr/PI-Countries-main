@@ -51,7 +51,7 @@ export default (state = initialState, action) => {
             if (action.payload === 'Z to A' || action.payload === 'za') {
                 return {
                     ...state,
-                    filteredCountries: state.filteredCountries.sort(function (a, b) {
+                    filteredCountries: state.filteredCountries.slice().sort(function (a, b) {
                         if (a.name < b.name) {
                             return 1;
                         }
@@ -65,7 +65,7 @@ export default (state = initialState, action) => {
             else if (action.payload === 'A to Z' || action.payload === 'az') {
                 return {
                     ...state,
-                    filteredCountries: state.filteredCountries.sort(function (a, b) {
+                    filteredCountries: state.filteredCountries.slice().sort(function (a, b) {
                         if (a.name < b.name) {
                             return -1;
                         }
@@ -79,7 +79,7 @@ export default (state = initialState, action) => {
             else if (action.payload === 'morePopulation') {
                 return {
                     ...state,
-                    filteredCountries: state.filteredCountries.sort(function (a, b) {
+                    filteredCountries: state.filteredCountries.slice().sort(function (a, b) {
                         return b.population - a.population
                     })
                 }
@@ -87,7 +87,7 @@ export default (state = initialState, action) => {
             else if (action.payload === 'lessPopulation') {
                 return {
                     ...state,
-                    filteredCountries: state.filteredCountries.sort(function (a, b) {
+                    filteredCountries: state.filteredCountries.slice().sort(function (a, b) {
                         return a.population - b.population
                     })
                 }
