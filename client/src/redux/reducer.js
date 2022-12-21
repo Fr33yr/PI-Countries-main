@@ -17,7 +17,7 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 countries: state.countries.concat(action.payload),
-                filteredCountries: [...state.countries]
+                filteredCountries: state.countries
             }
 
         case GET_DETAILS:
@@ -33,11 +33,11 @@ export default (state = initialState, action) => {
             }
 
         case FILTER_BY_CONTINENT:
-            if (action.payload !== 'filterBy:') {
+            if (action.payload !== 'all') {
                 return {
                     ...state,
-                    filteredCountries: state.filteredCountries.slice().filter(
-                        country => country.contient === action.payload
+                    filteredCountries: state.countries.filter(
+                        country => country.continent === action.payload.toLowerCase()
                     )
                 }
             } else {
@@ -46,7 +46,6 @@ export default (state = initialState, action) => {
                     filteredCountries: [...state.countries]
                 }
             }
-
 
         case SORTING:
             if (action.payload === 'Z to A' || action.payload === 'za') {
