@@ -20,14 +20,14 @@ export default function Countries() {
 
     //selectors
     const filteredCountries = useSelector(state => state.filteredCountries)
-
+    
     return (
         <>
             <Filters name={name} setName={setName}/>
             <div className={styles.countriescontainer}>
                 {filteredCountries.length > 0 &&
-                filteredCountries.map((item) => (
-                    <Card {...item} key={item.id}/>
+                filteredCountries.map((item,index) => (
+                    <Card {...item} key={index+item.id}/>
                 ))}
             </div>
         </>
