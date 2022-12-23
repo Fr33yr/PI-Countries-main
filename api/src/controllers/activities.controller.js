@@ -56,4 +56,4 @@ const getAllActivities = async (req, res) => {
     }
 }
 
-module.exports = { createActivity }
+module.exports = { createActivity, getAllActivities }
