@@ -5,14 +5,17 @@ import { getCountries, createActivity } from '../../redux/actions'
 import { Checkbox, Dificulty } from '../../components/index'
 
 export default function Activity() {
+    const [form, setForm] = useState({})
     const [selectedSeason, setSelectedSeason] = useState({
         seasons: []
     })
     const [dificulty, setDificulty] = useState(0)
-    const [form, setForm] = useState({})
-    const [search, setSearch] = useState('')
     const [countriesIds, setCountriesIds] = useState([])
+    const [search, setSearch] = useState('')
+
     const dispatch = useDispatch()
+ 
+    //selectors
     const countries = useSelector(state => state.countries)
 
 
@@ -30,8 +33,7 @@ export default function Activity() {
     }
 
     const handleSearch = (e) => {
-        e.preventDefault()
-        search === "" ? [] : dispatch(getCountries(search))
+        setSearch(e.target.value)
     }
 
     const handleAddCountry = (name) => {
@@ -42,6 +44,7 @@ export default function Activity() {
         e.preventDefault()
         dispatch(createActivity({
             ...form,
+            dificulty: dificulty,
             season: selectedSeason.seasons,
             countriesIds: countriesIds
         }))
@@ -65,9 +68,9 @@ export default function Activity() {
                 </form>
 
                 <div className={styles.searchcontainer}>
-                    <form onSubmit={handleSearch}>
+                    <form>
                         <input type="text" placeholder='countries...' 
-                        onChange={(e) => setSearch(e.target.value)} />
+                        onChange={handleSearch} />
                     </form>
                     <div className={styles.searchview}>
                         {
