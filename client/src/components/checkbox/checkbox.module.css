@@ -3,3 +3,7 @@
     flex-direction: row;
     justify-content: space-around;
 }
+
+.checkbox input{
+    margin: 0;
+}
