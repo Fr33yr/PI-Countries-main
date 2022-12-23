@@ -5,7 +5,7 @@ import { getCountries, createActivity } from '../../redux/actions'
 import { Checkbox, Dificulty } from '../../components/index'
 
 export default function Activity() {
-    const [form, setForm] = useState({})
+    const [form, setForm] = useState({name: '', duration: 1})
     const [selectedSeason, setSelectedSeason] = useState({
         seasons: []
     })
@@ -60,9 +60,7 @@ export default function Activity() {
                     <label>Duracion: </label>
                     <input type="number" name='duration' value={form.duration}
                         min={1} max={99} required onChange={handleChange} />
-                    <label>Dificultad: </label>
                     <Dificulty dificulty={dificulty} setDificulty={setDificulty} />
-                    <label>Temporada: </label>
                     <Checkbox selectedSeason={selectedSeason} setSelectedSeason={setSelectedSeason} />
                     <button type="submit">Crear</button>
                 </form>

@@ -1,7 +1,7 @@
 import styles from './checkbox.module.css'
 
 
-function Checkbox({selectedSeason, setSelectedSeason}) {
+function Checkbox({ selectedSeason, setSelectedSeason }) {
 
     const handleChecks = (e) => {
         const { value, checked } = e.target
@@ -20,6 +20,7 @@ function Checkbox({selectedSeason, setSelectedSeason}) {
 
     return (
         <>
+            <label>Temporada: </label>
             <fieldset onChange={handleChecks} className={styles.checkbox}>
                 <label htmlFor="fall">fall</label>
                 <input type="checkbox" name="season" value={'fall'} />
