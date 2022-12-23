@@ -20,8 +20,8 @@ function Checkbox({ selectedSeason, setSelectedSeason }) {
 
     return (
         <>
-            <label>Temporada: </label>
             <fieldset onChange={handleChecks} className={styles.checkbox}>
+                <legend>Temporada</legend>
                 <label htmlFor="fall">fall</label>
                 <input type="checkbox" name="season" value={'fall'} />
                 <label htmlFor="winter">winter</label>

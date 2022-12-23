@@ -8,8 +8,8 @@ function Dificulty({ dificulty, setDificulty }) {
 
     return (
         <>
-            <label>Dificultad: </label>
             <fieldset onChange={handleChange} className={styles.dificulty}>
+                <legend>Dificultad</legend>
                 <label htmlFor="dificulty">muy facil</label>
                 <input type="radio" name="dificulty" value={1} />
                 <label htmlFor="dificulty">facil</label>
