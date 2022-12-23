@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import styles from './activity.module.css'
 import { getCountries, createActivity } from '../../redux/actions'
-import {Checkbox, Dificulty} from '../../components/index'
+import { Checkbox, Dificulty } from '../../components/index'
 
 export default function Activity() {
     const [selectedSeason, setSelectedSeason] = useState({
@@ -53,21 +53,21 @@ export default function Activity() {
                 <form className={styles.activityform} onSubmit={handleSubmit}>
                     <label>Nombre: </label>
                     <input type="text" name='name' value={form.name}
-                        required onChange={handleChange} />
-                    <label>Dificultad: </label>
-                    <Dificulty dificulty={dificulty} setDificulty={setDificulty}/>
+                        required onChange={handleChange} autoComplete='off' />
                     <label>Duracion: </label>
                     <input type="number" name='duration' value={form.duration}
                         min={1} max={99} required onChange={handleChange} />
+                    <label>Dificultad: </label>
+                    <Dificulty dificulty={dificulty} setDificulty={setDificulty} />
                     <label>Temporada: </label>
-                    <Checkbox selectedSeason={selectedSeason} setSelectedSeason={setSelectedSeason}/>
+                    <Checkbox selectedSeason={selectedSeason} setSelectedSeason={setSelectedSeason} />
                     <button type="submit">Crear</button>
                 </form>
 
                 <div className={styles.searchcontainer}>
                     <form onSubmit={handleSearch}>
-                        <input type="text" onChange={(e) => setSearch(e.target.value)} />
-                        <button type="submit" disabled={search === ""}>Find</button>
+                        <input type="text" placeholder='countries...' 
+                        onChange={(e) => setSearch(e.target.value)} />
                     </form>
                     <div className={styles.searchview}>
                         {

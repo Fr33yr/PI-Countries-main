@@ -20,7 +20,8 @@ h3,
 p {
   padding: 0;
   margin: 0;
-  font-family: 'Roboto Serif', serif;
+  /* font-family: 'Roboto', sans-serif; */
+  font-family: 'Roboto Slab', serif;
 }
 
 html,
@@ -28,7 +29,7 @@ body {
   background-color: var(--bg-primary);
 }
 
-main{
+main {
   padding-top: 4rem;
   min-height: 100vh;
   display: flex;
@@ -45,4 +46,3 @@ a {
   text-decoration: none;
   list-style: none;
 }
-

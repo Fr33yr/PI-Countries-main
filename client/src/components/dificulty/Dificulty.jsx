@@ -1,4 +1,4 @@
-import React from 'react'
+import styles from './dificulty.module.css'
 
 function Dificulty({dificulty, setDificulty}) {
 
@@ -8,7 +8,7 @@ function Dificulty({dificulty, setDificulty}) {
 
     return (
         <>
-            <fieldset onChange={handleChange}>
+            <fieldset onChange={handleChange} className={styles.dificulty}>
                 <label htmlFor="dificulty">muy facil</label>
                 <input type="radio" name="dificulty" value={1}/>
                 <label htmlFor="dificulty">facil</label>
