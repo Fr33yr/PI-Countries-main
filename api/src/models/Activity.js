@@ -25,5 +25,6 @@ module.exports = (sequelize) => {
             type: DataTypes.ARRAY(Sequelize.STRING),
             allowNull: false
         },
-    });
+    },
+    {timestamps: false});
 }
