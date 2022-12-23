@@ -17,6 +17,6 @@ module.exports = (sequelize) => {
     capital: {type: DataTypes.STRING},
     subregion: { type: DataTypes.STRING },
     area: { type: DataTypes.FLOAT },
-    population: { type: DataTypes.INTEGER }
+    population: { type: DataTypes.INTEGER },
   });
 };

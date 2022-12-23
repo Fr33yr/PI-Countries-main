@@ -1,4 +1,4 @@
-const { DataTypes, Sequelize } = require('sequelize')
+const { DataTypes, Sequelize, UUIDV4 } = require('sequelize')
 
 module.exports = (sequelize) => {
     
@@ -24,6 +24,6 @@ module.exports = (sequelize) => {
         season: { 
             type: DataTypes.ARRAY(Sequelize.STRING),
             allowNull: false
-        }
+        },
     });
 }

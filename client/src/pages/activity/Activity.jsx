@@ -2,11 +2,13 @@ import { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import styles from './activity.module.css'
 import { getCountries, createActivity } from '../../redux/actions'
+import {Checkbox, Dificulty} from '../../components/index'
 
 export default function Activity() {
     const [selectedSeason, setSelectedSeason] = useState({
         seasons: []
     })
+    const [dificulty, setDificulty] = useState(0)
     const [form, setForm] = useState({})
     const [search, setSearch] = useState('')
     const [countriesIds, setCountriesIds] = useState([])
@@ -19,23 +21,6 @@ export default function Activity() {
     useEffect(() => {
         dispatch(getCountries(search))
     }, [search])
-
-    const handleChecks = (e) => {
-        const { value, checked } = e.target
-        const { seasons } = selectedSeason
-
-        console.log(`${value} is ${checked}`);
-
-        if (checked) {
-            setSelectedSeason({
-                seasons: [...seasons, value],
-            })
-        } else {
-            setSelectedSeason({
-                seasons: seasons.filter((e) => e !== value)
-            })
-        }
-    }
 
 
     const handleChange = (e) => {
@@ -70,22 +55,21 @@ export default function Activity() {
                     <input type="text" name='name' value={form.name}
                         required onChange={handleChange} />
                     <label>Dificultad: </label>
-                    <input type="number" min={1} max={5} name='dificulty' value={form.dificulty}
-                        required onChange={handleChange} />
+                    <Dificulty dificulty={dificulty} setDificulty={setDificulty}/>
                     <label>Duracion: </label>
                     <input type="number" name='duration' value={form.duration}
                         min={1} max={99} required onChange={handleChange} />
                     <label>Temporada: </label>
-                    
+                    <Checkbox selectedSeason={selectedSeason} setSelectedSeason={setSelectedSeason}/>
                     <button type="submit">Crear</button>
                 </form>
 
-                <div className="searchcontainer">
+                <div className={styles.searchcontainer}>
                     <form onSubmit={handleSearch}>
                         <input type="text" onChange={(e) => setSearch(e.target.value)} />
                         <button type="submit" disabled={search === ""}>Find</button>
                     </form>
-                    <div className="searchview">
+                    <div className={styles.searchview}>
                         {
                             search !== '' && countries.length > 0 && countries.map((c, index) => (
                                 <div className={styles.searchresult}>
