@@ -1,6 +1,4 @@
-const { Country, Activity } = require('../../db.js');
-const axios = require('axios');
-const { Op } = require('sequelize');
+const { Country } = require('../../db.js');
 
 // query by id
 const getCountry = async (req, res) => {

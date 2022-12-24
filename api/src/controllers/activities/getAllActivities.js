@@ -1,5 +1,4 @@
 const { Activity, Country } = require('../../db.js');
-const {Op} = require('sequelize')
 
 // get all activities
 const getAllActivities = async (req, res) => {
