@@ -5,11 +5,11 @@ import { getCountries, createActivity } from '../../redux/actions'
 import { Checkbox, Radio, Text, Number } from '../../components/index'
 
 export default function Activity() {
-    const [form, setForm] = useState({name: '', duration: 1})
+    const [form, setForm] = useState({name: '', dificulty: 1, duration: 1})
     const [selectedSeason, setSelectedSeason] = useState({
         seasons: []
     })
-    const [dificulty, setDificulty] = useState(0)
+    //const [dificulty, setDificulty] = useState(0)
     const [countriesIds, setCountriesIds] = useState([])
     const [search, setSearch] = useState('')
 
@@ -54,13 +54,9 @@ export default function Activity() {
         <>
             <div className={styles.activities}>
                 <form className={styles.activityform} onSubmit={handleSubmit}>
-                    <label>Nombre: </label>
-                    <input type="text" name='name' value={form.name}
-                        required onChange={handleChange} autoComplete='off' />
-                    <label>Duracion: </label>
-                    <input type="number" name='duration' value={form.duration}
-                        min={1} max={99} required onChange={handleChange} />
-                    <Radio dificulty={dificulty} setDificulty={setDificulty} />
+                    <Text form={form} setForm={setForm}/>
+                    <Number form={form} setForm={setForm}/>
+                    <Radio form={form} setForm={setForm} />
                     <Checkbox selectedSeason={selectedSeason} setSelectedSeason={setSelectedSeason} />
                     <button type="submit">Crear</button>
                 </form>

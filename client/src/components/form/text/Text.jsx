@@ -1,6 +1,13 @@
 import styles from './text.module.css'
 
-function Text() {
+function Text({form, setForm}) {
+
+    const handleChange = (e) => {
+        const name = e.target.name;
+        const value = e.target.value;
+        setForm(values => ({ ...values, [name]: value }))
+    }
+
     return (
         <>
             <label>Nombre: </label>

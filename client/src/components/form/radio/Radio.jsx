@@ -1,9 +1,10 @@
-import styles from './dificulty.module.css'
+import styles from './radio.module.css'
 
-function Dificulty({ dificulty, setDificulty }) {
+function Radio({ form, setForm }) {
 
     const handleChange = (e) => {
-        setDificulty(e.target.value)
+        const value = e.target.value
+        setForm(values => ({...values, dificulty: value}))
     }
 
     return (
@@ -25,4 +26,4 @@ function Dificulty({ dificulty, setDificulty }) {
     )
 }
 
-export default Dificulty
+export default Radio
