@@ -9,7 +9,6 @@ export default function Activity() {
     const [selectedSeason, setSelectedSeason] = useState({
         seasons: []
     })
-    //const [dificulty, setDificulty] = useState(0)
     const [countriesIds, setCountriesIds] = useState([])
     const [search, setSearch] = useState('')
 
@@ -20,17 +19,9 @@ export default function Activity() {
 
 
 
-
     useEffect(() => {
         dispatch(getCountries(search))
     }, [search])
-
-
-    const handleChange = (e) => {
-        const name = e.target.name;
-        const value = e.target.value;
-        setForm(values => ({ ...values, [name]: value }))
-    }
 
     const handleSearch = (e) => {
         setSearch(e.target.value)
@@ -44,7 +35,6 @@ export default function Activity() {
         e.preventDefault()
         dispatch(createActivity({
             ...form,
-            dificulty: dificulty,
             season: selectedSeason.seasons,
             countriesIds: countriesIds
         }))
@@ -54,9 +44,9 @@ export default function Activity() {
         <>
             <div className={styles.activities}>
                 <form className={styles.activityform} onSubmit={handleSubmit}>
-                    <Text form={form} setForm={setForm}/>
-                    <Number form={form} setForm={setForm}/>
-                    <Radio form={form} setForm={setForm} />
+                    <Text setForm={setForm}/>
+                    <Number setForm={setForm}/>
+                    <Radio setForm={setForm} />
                     <Checkbox selectedSeason={selectedSeason} setSelectedSeason={setSelectedSeason} />
                     <button type="submit">Crear</button>
                 </form>

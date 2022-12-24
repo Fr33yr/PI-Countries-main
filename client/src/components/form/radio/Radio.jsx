@@ -1,10 +1,10 @@
 import styles from './radio.module.css'
 
-function Radio({ form, setForm }) {
+function Radio({ setForm }) {
 
     const handleChange = (e) => {
         const value = e.target.value
-        setForm(values => ({...values, dificulty: value}))
+        setForm(values => ({ ...values, dificulty: value }))
     }
 
     return (
