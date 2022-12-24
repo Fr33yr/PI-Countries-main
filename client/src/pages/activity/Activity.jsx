@@ -4,7 +4,7 @@ import { createActivity } from '../../redux/actions'
 import { Checkbox, Radio, Text, Number, Search } from '../../components/index'
 
 export default function Activity() {
-    const [form, setForm] = useState({ name: '', dificulty: 1, duration: 1 })
+    const [form, setForm] = useState({ name: '', dificulty: '', duration: 1 })
     const [selectedSeason, setSelectedSeason] = useState({
         seasons: []
     })

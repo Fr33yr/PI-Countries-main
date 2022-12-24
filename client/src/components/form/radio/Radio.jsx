@@ -12,15 +12,15 @@ function Radio({ setForm }) {
             <fieldset onChange={handleChange} className={styles.dificulty}>
                 <legend>Dificultad</legend>
                 <label htmlFor="dificulty">muy facil</label>
-                <input type="radio" name="dificulty" value={1} />
+                <input type="radio" name="dificulty" value={'muy facil'} />
                 <label htmlFor="dificulty">facil</label>
-                <input type="radio" name="dificulty" value={2} />
+                <input type="radio" name="dificulty" value={'facil'} />
                 <label htmlFor="dificulty">normal</label>
-                <input type="radio" name="dificulty" value={3} />
+                <input type="radio" name="dificulty" value={'normal'} />
                 <label htmlFor="dificulty">dificil</label>
-                <input type="radio" name="dificulty" value={4} />
+                <input type="radio" name="dificulty" value={'dificil'} />
                 <label htmlFor="dificulty">muy dificil</label>
-                <input type="radio" name="dificulty" value={5} />
+                <input type="radio" name="dificulty" value={'muy dificil'} />
             </fieldset>
         </>
     )
