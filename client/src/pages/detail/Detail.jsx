@@ -17,14 +17,14 @@ export default function Detail() {
     return (
         <>
             <div className="countrydetail">
-                <img src="" alt="flag" height={200} width={200} />
-                <h2>Nombre del pais</h2>
-                <h3>Codigo del pais</h3>
+                <img src={countryDetails.images[1]} alt="flag" height={200} width={200} />
+                <h2>{countryDetails.name}</h2>
+                <h3>{countryDetails.id}</h3>
                 <ul>
-                    <li>capital</li>
-                    <li>subregion</li>
-                    <li>area</li>
-                    <li>poblacion</li>
+                    <li>Capital: {countryDetails.capital}</li>
+                    <li>Subregion: {countryDetails.subregion}</li>
+                    <li>Area: {countryDetails.area}</li>
+                    <li>Poblacion: {countryDetails.population}</li>
                 </ul>
                 <div>
                     actividades turisticas
