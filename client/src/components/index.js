@@ -1,3 +1,5 @@
+export { default as DetailButton } from './buttons/detailButton/DetailButton';
+export { default as SubmitButton } from './buttons/submitButton/SubmitButton';
 export { default as Card } from './card/Card';
 export { default as Filters } from './filters/Filters';
 export { default as Checkbox } from './form/checkbox/Checkbox';
