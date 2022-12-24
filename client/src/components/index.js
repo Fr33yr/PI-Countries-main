@@ -3,6 +3,7 @@ export { default as Filters } from './filters/Filters';
 export { default as Checkbox } from './form/checkbox/Checkbox';
 export { default as Number } from './form/number/Number';
 export { default as Radio } from './form/radio/Radio';
+export { default as Search } from './form/search/Search';
 export { default as Text } from './form/text/Text';
 export { default as Layout } from './layout/Layout';
 export { default as Footer } from './layout/footer/Footer';
