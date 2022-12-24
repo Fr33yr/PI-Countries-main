@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 
 import { getCountries } from '../../../redux/actions'
+import styles from './search.module.css'
 
 function Search({ countriesIds, setCountriesIds }) {
     const [search, setSearch] = useState('')
