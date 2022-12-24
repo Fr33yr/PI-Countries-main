@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import styles from './activity.module.css'
 import { getCountries, createActivity } from '../../redux/actions'
-import { Checkbox, Dificulty } from '../../components/index'
+import { Checkbox, Radio, Text, Number } from '../../components/index'
 
 export default function Activity() {
     const [form, setForm] = useState({name: '', duration: 1})
@@ -60,7 +60,7 @@ export default function Activity() {
                     <label>Duracion: </label>
                     <input type="number" name='duration' value={form.duration}
                         min={1} max={99} required onChange={handleChange} />
-                    <Dificulty dificulty={dificulty} setDificulty={setDificulty} />
+                    <Radio dificulty={dificulty} setDificulty={setDificulty} />
                     <Checkbox selectedSeason={selectedSeason} setSelectedSeason={setSelectedSeason} />
                     <button type="submit">Crear</button>
                 </form>
