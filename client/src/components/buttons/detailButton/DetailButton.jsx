@@ -5,7 +5,7 @@ function DetailButton({id}) {
     
     return (
         <>
-            <Link to={`/country/${id}`}/>
+            <Link to={`/country/${id}`} className={styles.detailbutton}>Details</Link>
         </>
     )
 }

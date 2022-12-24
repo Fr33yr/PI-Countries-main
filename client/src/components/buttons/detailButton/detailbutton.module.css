@@ -1,0 +1,7 @@
+.detailbutton{
+    border: 2px solid darkgray;
+    padding: .3rem .5rem;
+}
+.detailbutton:hover{
+    background-color: gray;
+}
