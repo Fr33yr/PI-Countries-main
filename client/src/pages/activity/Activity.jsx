@@ -1,7 +1,10 @@
 import { useState } from 'react'
 import styles from './activity.module.css'
 import { createActivity } from '../../redux/actions'
-import { Checkbox, Radio, Text, Number, Search } from '../../components/index'
+import {
+    Checkbox, Radio, Text, Number,
+    Search, SubmitButton
+} from '../../components/index'
 
 export default function Activity() {
     const [form, setForm] = useState({ name: '', dificulty: '', duration: 1 })
