@@ -14,7 +14,7 @@ module.exports = (sequelize) => {
             unique: true
         },
         dificulty: { 
-            type: DataTypes.INTEGER,
+            type: DataTypes.STRING,
             allowNull: false
         },
         duration: { 
