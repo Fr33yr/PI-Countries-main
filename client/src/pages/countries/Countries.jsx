@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import styles from './countries.module.css'
 
-import { getCountries } from '../../redux/actions'
+import { getCountries, getAllActivities } from '../../redux/actions'
 import {Filters, Card} from '../../components/index'
 
 
@@ -16,6 +16,7 @@ export default function Countries() {
     const countries = useSelector(state => state.countries)
 
     useEffect(()=>{
+        dispatch(getAllActivities())
         if(!countries || countries.length <= 0){
             if(name !== undefined || name !== ''){
                 dispatch(getCountries(name))
