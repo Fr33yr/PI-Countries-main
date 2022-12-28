@@ -17,13 +17,13 @@ export default function Activity() {
     const [isDisabled, setIsDisabled] = useState(false)
     const dispatch = useDispatch()
 
-    useEffect(()=>{
-        if(form.dificulty === '' || form.name === '' || selectedSeason.seasons.length === 0){
+    useEffect(() => {
+        if (form.dificulty === '' || form.name === '' || selectedSeason.seasons.length === 0) {
             setIsDisabled(true)
-        }else{
+        } else {
             setIsDisabled(false)
         }
-    },[form])
+    }, [form])
 
     //handlers
     const handleSubmit = (e) => {
@@ -39,16 +39,16 @@ export default function Activity() {
         <>
             <div className={styles.activities}>
                 <form className={styles.activityform} onSubmit={handleSubmit}>
-                    <Text setForm={setForm} form={form} setIsDisabled={setIsDisabled} />
-                    <Number setForm={setForm} setIsDisabled={setIsDisabled} />
-                    <Radio setForm={setForm} setIsDisabled={setIsDisabled} />
-                    <Checkbox selectedSeason={selectedSeason} setSelectedSeason={setSelectedSeason}
-                        setIsDisabled={setIsDisabled} />
+                    <Text setForm={setForm} form={form} />
+                    <Number setForm={setForm} />
+                    <Radio setForm={setForm} />
+                    <Checkbox selectedSeason={selectedSeason}
+                        setSelectedSeason={setSelectedSeason} />
                     <button type="submit" disabled={isDisabled}>Crear</button>
                 </form>
                 <Search countriesIds={countriesIds}
-                    setCountriesIds={setCountriesIds} 
-                    setIsDisabled={setIsDisabled}/>
+                    setCountriesIds={setCountriesIds}
+                    setIsDisabled={setIsDisabled} />
             </div>
         </>
     )
