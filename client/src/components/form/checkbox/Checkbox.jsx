@@ -6,7 +6,6 @@ function Checkbox({ selectedSeason, setSelectedSeason }) {
     const handleChecks = (e) => {
         const { value, checked } = e.target
         const { seasons } = selectedSeason
-
         if (checked) {
             setSelectedSeason({
                 seasons: [...seasons, value],
