@@ -11,7 +11,8 @@ function Number({ setForm }) {
         <>
             <label>Duracion: </label>
             <input type="number" name='duration'
-                min={1} max={99} required onChange={handleChange} />
+                min={1} max={99} required onChange={handleChange}
+                defaultValue={1} />
         </>
     )
 }

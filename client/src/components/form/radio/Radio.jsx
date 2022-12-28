@@ -7,6 +7,7 @@ function Radio({ setForm }) {
         setForm(values => ({ ...values, dificulty: value }))
     }
 
+
     return (
         <>
             <fieldset onChange={handleChange} className={styles.dificulty}>
