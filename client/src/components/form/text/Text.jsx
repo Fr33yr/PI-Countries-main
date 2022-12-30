@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import styles from './text.module.css'
 
+import {FormError} from '../../index'
+
 function Text({ setForm }) {
     const [error, setError] = useState('')
     const handleChange = (e) => {
@@ -19,7 +21,8 @@ function Text({ setForm }) {
     }
 
     return (
-        <>
+        <>  
+            <FormError text={error}/>
             <label>Nombre </label>
             <input type="text" name='name' onSelect={handleError}
                 required onChange={handleChange} autoComplete='off'
