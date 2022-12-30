@@ -1,11 +1,13 @@
 import {
     GET_COUNTRIES, CREATE_ACTIVITY,
-    GET_DETAILS, SORTING, FILTER_BY_CONTINENT
+    GET_DETAILS, SORTING, FILTER_BY_CONTINENT,
+    GET_ACTIVITIES
 } from './action.types'
 
 const initialState = {
     countries: [],
     filteredCountries: [],
+    activities: [],
     countryDetail: {},
     activity: {},
 }
@@ -92,6 +94,11 @@ export default (state = initialState, action) => {
                     })
                 }
             }
+            case GET_ACTIVITIES:
+                return{
+                    ...state,
+                    activities: [...action.payload]
+                }
 
         default:
             return { ...state }

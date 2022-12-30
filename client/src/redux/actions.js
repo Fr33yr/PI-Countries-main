@@ -3,7 +3,7 @@ import {
     GET_COUNTRIES,
     CREATE_ACTIVITY,
     GET_DETAILS, FILTER_BY_CONTINENT,
-    FILTER_BY_ACTIVITY, SORTING
+    FILTER_BY_ACTIVITY, SORTING, GET_ACTIVITIES
 } from './action.types'
 
 
@@ -15,11 +15,24 @@ const createActivity = (props) => {
         axios.post(`http://localhost:3001/activities`, {
             name, dificulty, duration, season, countriesIds
         }).then(function (response) {
-            dispatch({ type: CREATE_ACTIVITY, payload: props })
+            dispatch({ type: CREATE_ACTIVITY, payload: response })
         })
             .catch(function (error) {
                 console.log(error);
             });
+    }
+}
+
+const getAllActivities = () => {
+    return async function(dispatch) {
+
+        const activities = await axios.get(`http://localhost:3001/activities`)
+
+        try {
+            dispatch({type: GET_ACTIVITIES, payload: activities.data})
+        } catch (error) {
+            return error
+        }
     }
 }
 
@@ -82,4 +95,4 @@ const filterBy = (continent, activity) => {
     }
 }
 
-export { getCountries, createActivity, getDetails, sortBy, filterBy }
+export { getCountries, createActivity, getDetails, sortBy, filterBy, getAllActivities }
