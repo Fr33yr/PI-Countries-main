@@ -16,29 +16,3 @@
     align-items: flex-start;
     justify-content: flex-start;
 }
-
-.searchresult {
-    display: flex;
-    flex-direction: row-reverse;
-    margin: .2rem 0;
-}
-
-.searchresult p {
-    font-size: 1rem;
-    margin-left: .5rem;
-    letter-spacing: 1px;
-}
-
-.searchresult button {
-    color: wheat;
-    background-color: #2b2b2b;
-    border-color: wheat;
-}
-
-.searchresult button:hover {
-    background-color: lightgray;
-}
-
-.searchresult button:disabled {
-    background-color: lightgray;
-}

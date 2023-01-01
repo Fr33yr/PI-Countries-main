@@ -3,9 +3,11 @@ import { useSelector, useDispatch } from 'react-redux'
 
 import { getCountries } from '../../../redux/actions'
 import styles from './search.module.css'
+import { SearchResult } from '../../index'
 
 function Search({ countriesIds, setCountriesIds }) {
     const [search, setSearch] = useState('')
+    const [countriesNames, setCountriesNames] = useState([])
 
     const dispatch = useDispatch()
 
@@ -16,12 +18,14 @@ function Search({ countriesIds, setCountriesIds }) {
     //selectors
     const countries = useSelector(state => state.countries)
 
+    //handlers
     const handleSearch = (e) => {
         setSearch(e.target.value)
     }
 
-    const handleAddCountry = (name) => {
-        setCountriesIds(countriesIds.concat([name]))
+    const handleAddCountry = (id, name) => {
+        setCountriesIds(countriesIds.concat([id]))
+        setCountriesNames(countriesNames.concat([name]))
     }
 
     return (
@@ -34,14 +38,18 @@ function Search({ countriesIds, setCountriesIds }) {
                 <div className={styles.searchview}>
                     {
                         search !== '' && countries.length > 0 && countries.map((c, index) => (
-                            <div className={styles.searchresult}>
-                                <p>{c.name}</p>
-                                <button onClick={() => handleAddCountry(c.id)}
-                                    disabled={countriesIds.includes(c.id)}>+</button>
-                            </div>
+                            <SearchResult id={c.id} name={c.name} countriesIds={countriesIds}
+                                handleAddCountry={handleAddCountry} key={index + 4} />
                         ))
                     }
                 </div>
+                {
+                    countriesNames.length > 0 ? countriesNames.map(c => (
+                        <div>
+                            <p>{c}</p>
+                        </div>
+                    )) : ""
+                }
             </div>
         </>
     )
