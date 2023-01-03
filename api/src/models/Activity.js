@@ -1,4 +1,4 @@
-const { DataTypes, Sequelize, UUIDV4 } = require('sequelize')
+const { DataTypes, UUIDV4 } = require('sequelize')
 
 module.exports = (sequelize) => {
     
@@ -14,7 +14,7 @@ module.exports = (sequelize) => {
             unique: true
         },
         dificulty: { 
-            type: DataTypes.STRING,
+            type: DataTypes.INTEGER,
             allowNull: false
         },
         duration: { 
@@ -22,7 +22,7 @@ module.exports = (sequelize) => {
             allowNull: false
         },
         season: { 
-            type: DataTypes.ARRAY(Sequelize.STRING),
+            type: DataTypes.ENUM("summer", "autumn", "winter", "spring"),
             allowNull: false
         },
     },
