@@ -1,9 +1,0 @@
-.checkbox{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
-}
-
-.checkbox input{
-    margin: 0;
-}

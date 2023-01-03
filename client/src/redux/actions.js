@@ -15,21 +15,21 @@ const createActivity = (props) => {
         axios.post(`http://localhost:3001/activities`, {
             name, dificulty, duration, season, countriesIds
         }).then(function (response) {
-            dispatch({ type: CREATE_ACTIVITY, payload: response })
+            dispatch({ type: CREATE_ACTIVITY, payload: response.data })
         })
-            .catch(function (error) {
-                console.log(error);
+            .catch((error) => {
+                dispatch({type: CREATE_ACTIVITY, payload: error.response.data})
             });
     }
 }
 
 const getAllActivities = () => {
-    return async function(dispatch) {
+    return async function (dispatch) {
 
         const activities = await axios.get(`http://localhost:3001/activities`)
 
         try {
-            dispatch({type: GET_ACTIVITIES, payload: activities.data})
+            dispatch({ type: GET_ACTIVITIES, payload: activities.data })
         } catch (error) {
             return error
         }
