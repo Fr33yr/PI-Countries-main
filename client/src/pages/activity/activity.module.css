@@ -17,12 +17,6 @@
     justify-content: center;
 }
 
-.activityform button {
-    margin-top: 1rem;
-    max-width: 5rem;
-}
-
-
 .activityform label {
     margin: .2rem 0;
 }
@@ -34,4 +28,42 @@
 
 .activityform fieldset {
     margin: 0 0 1rem 0;
+}
+
+.dificultyinput{
+    display: flex;
+    flex-direction: row;
+    margin-bottom: .5rem;
+}
+
+.starbtn{
+    padding: 0;
+    margin-left: 0.3rem;
+    width: fit-content;
+    background-color: transparent;
+    border: none;
+}
+
+.starbtn:hover{
+    cursor: pointer;
+}
+
+.seasoninput{
+    
+}
+
+.submitbtn{
+    margin-top: 1rem;
+    max-width: 5rem;
+    cursor: pointer;
+    background-color: var(--bg-secondary);
+}
+
+.submitbtn:hover{
+    background-color: var(--bg-primary);
+}
+
+.submitbtn:disabled{
+    cursor: default;
+    background-color: transparent;
 }
