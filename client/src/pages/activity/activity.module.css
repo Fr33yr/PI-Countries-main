@@ -23,7 +23,7 @@
 
 .activityform input {
     font-size: 1.5rem;
-    margin: 0 0 1rem 0;
+    margin: 0 0 2rem 0;
 }
 
 .activityform fieldset {
@@ -33,7 +33,7 @@
 .dificultyinput{
     display: flex;
     flex-direction: row;
-    margin-bottom: .5rem;
+    margin-bottom: 2rem;
 }
 
 .starbtn{
@@ -49,14 +49,19 @@
 }
 
 .seasoninput{
-    
+    font-size: large;
+    padding: .5rem;
 }
 
+/* === Submit button === */
+
 .submitbtn{
-    margin-top: 1rem;
-    max-width: 5rem;
     cursor: pointer;
     background-color: var(--bg-secondary);
+    margin-top: 6.7rem;
+    max-width: 5rem;
+    padding: .3rem .5rem;
+    font-size: medium;
 }
 
 .submitbtn:hover{
