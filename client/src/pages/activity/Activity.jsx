@@ -7,7 +7,7 @@ import { faStar as solidFaStar } from '@fortawesome/free-solid-svg-icons'
 import styles from './activity.module.css'
 import { createActivity } from '../../redux/actions'
 import { Search, FormError } from '../../components/index'
-import { seasons } from '../../utils/seasons'
+import { seasonsOptions } from '../../utils/options'
 
 export default function Activity() {
     // === Local state ===
@@ -78,7 +78,7 @@ export default function Activity() {
                     <label htmlFor="">Temporada</label>
                     <select name='season' value={formValues.season}
                         onChange={handleChange} className={styles.seasoninput}>
-                        {seasons.map((season, index) => (
+                        {seasonsOptions.map((season, index) => (
                             <option value={season}
                                 key={`season-option-${index}`}
                             >{season}</option>
