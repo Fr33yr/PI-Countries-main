@@ -1,0 +1,74 @@
+.activities {
+    max-width: 60rem;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    border: 2px solid white;
+    margin: 10rem 0 0 0;
+    padding: 3.4rem;
+}
+
+/* === Activity Form === */
+
+.activityform {
+    max-width: 30rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.activityform label {
+    margin: .2rem 0;
+}
+
+.activityform input {
+    font-size: 1.5rem;
+    margin: 0 0 2rem 0;
+}
+
+.activityform fieldset {
+    margin: 0 0 1rem 0;
+}
+
+.dificultyinput{
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 2rem;
+}
+
+.starbtn{
+    padding: 0;
+    margin-left: 0.3rem;
+    width: fit-content;
+    background-color: transparent;
+    border: none;
+}
+
+.starbtn:hover{
+    cursor: pointer;
+}
+
+.seasoninput{
+    font-size: large;
+    padding: .5rem;
+}
+
+/* === Submit button === */
+
+.submitbtn{
+    cursor: pointer;
+    background-color: var(--bg-secondary);
+    margin-top: 6.7rem;
+    max-width: 5rem;
+    padding: .3rem .5rem;
+    font-size: medium;
+}
+
+.submitbtn:hover{
+    background-color: var(--bg-primary);
+}
+
+.submitbtn:disabled{
+    cursor: default;
+    background-color: transparent;
+}
