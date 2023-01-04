@@ -18,10 +18,12 @@
 //                       `=---='
 //     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 const server = require('./src/app.js');
+const { getApiData } = require('./src/controllers/contries/getApiData.js');
 const { conn } = require('./src/db.js');
 
 // Syncing all the models at once.
 conn.sync({ force: false }).then(() => {
+  getApiData()
   server.listen(3001, () => {
     console.log('%s listening at 3001'); // eslint-disable-line no-console
   });
