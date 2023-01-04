@@ -3,52 +3,60 @@ import { useSelector, useDispatch } from 'react-redux'
 
 import { getCountries } from '../../redux/actions'
 import styles from './search.module.css'
-import { SearchResult } from '../index'
 
-function Search({ countriesIds, setCountriesIds }) {
+function Search( {setCountriesIds, countriesIds} ) {
+    // === Local state ===
     const [search, setSearch] = useState('')
-    const [countriesNames, setCountriesNames] = useState([])
+    const [selectedCountries, setSelectedCountries] = useState([])
+    const [selected, setSelected] = useState(false)
 
     const dispatch = useDispatch()
 
     useEffect(() => {
-        dispatch(getCountries(search))
+        search.length > 0 ? dispatch(getCountries(search)) : ''
     }, [search])
 
-    //selectors
+    // === Selectors ===
     const countries = useSelector(state => state.countries)
 
-    //handlers
+    // === Handlers ===
     const handleSearch = (e) => {
         setSearch(e.target.value)
     }
-
-    const handleAddCountry = (id, name) => {
-        setCountriesIds(countriesIds.concat([id]))
-        setCountriesNames(countriesNames.concat([name]))
+    const handleAddCountry = (country) => {
+        setCountriesIds(countriesIds.concat([country.id]))
+        setSelectedCountries(selectedCountries.concat([country]))
     }
 
     return (
         <>
             <div className={styles.searchcontainer}>
                 <form>
-                    <input type="text" placeholder='countries...'
-                        onChange={handleSearch} />
+                    <input type="text" placeholder='Country...'
+                        onChange={handleSearch} onSelect={()=>setSelected(!selected)}
+                    />
                 </form>
                 <div className={styles.searchview}>
-                    {
-                        search !== '' && countries.length > 0 && countries.map((c, index) => (
-                            <SearchResult id={c.id} name={c.name} countriesIds={countriesIds}
-                                handleAddCountry={handleAddCountry} key={index + 4} />
-                        ))
+                    {countries.map((country, index) => {
+                        return (
+                            <>
+                                <div>
+                                    <p>{country.name}</p>
+                                    <button onClick={()=>handleAddCountry(country)}>+</button>
+                                </div>
+                            </>
+                        )
+                    })
                     }
                 </div>
                 {
-                    countriesNames.length > 0 ? countriesNames.map(c => (
-                        <div>
-                            <p>{c}</p>
-                        </div>
-                    )) : ""
+                    selectedCountries.length > 0 ? selectedCountries.map((country, index) => {
+                        return (
+                            <>
+                                <p>{country.name}</p>
+                            </>
+                        )
+                    }) : ""
                 }
             </div>
         </>
