@@ -2,21 +2,23 @@ import styles from './filters.module.css'
 import { useDispatch } from 'react-redux'
 
 import { sortBy, filterBy } from '../../redux/actions'
-import {continents} from '../../utils/continents'
+import {continentOptions, sortfiltersOptions} from '../../utils/options'
 
 function Filters({name, setName}) {
     const dispatch = useDispatch()
 
+    // === Handlers ===
     const handleSort = (e) => {
-        dispatch(sortBy(e.target.value))
+        const value = e.target.value
+        dispatch(sortBy(value))
     }
-
     const handleFilterByContinent = (e) => {
-        dispatch(filterBy(e.target.value, null))
+        const value = e.target.value
+        dispatch(filterBy(value, null))
     }
-
     const handleName = (e) => {
-        setName(e.target.value)
+        const value = e.target.value
+        setName(value)
     }
 
     return (
@@ -24,19 +26,19 @@ function Filters({name, setName}) {
             <div className={styles.filters}>
                 <input type="text" name="name" onChange={handleName}/>
                 <select name="contients" onChange={handleFilterByContinent}>
-                    {continents.map((c,index) => (
+                    {continentOptions.map((c,index) => (
                         <option value={c} key={index}>{c}</option>
                     ))}
                 </select>
                 <fieldset onChange={handleSort}>
-                    <label htmlFor="A to Z">A to Z</label>
-                    <input type="radio" name="sort" value={'A to Z'} />
-                    <label htmlFor="Z to A">Z to A</label>
-                    <input type="radio" name="sort" value={'Z to A'} />
-                    <label htmlFor="morePopulation">morePopulation</label>
-                    <input type="radio" name="sort" value={'morePopulation'} />
-                    <label htmlFor="lessPopulation">lessPopulation</label>
-                    <input type="radio" name="sort" value={'lessPopulation'} />
+                    {sortfiltersOptions.map((item, index) => {
+                        return(
+                            <>
+                                <label htmlFor={item}>{item}</label>
+                                <input type="radio" name='sort' value={item}/>
+                            </>
+                        )
+                    })}
                 </fieldset>
             </div>
         </>
