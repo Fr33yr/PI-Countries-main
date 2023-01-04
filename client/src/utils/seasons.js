@@ -1,1 +1,0 @@
-export const seasons = ["summer", "autumn", "winter", "spring"]
