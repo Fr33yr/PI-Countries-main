@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 
-import { getCountries } from '../../redux/actions'
+import { getCountries, resetCountries } from '../../redux/actions'
 import styles from './search.module.css'
 
 function Search( {setCountriesIds, countriesIds} ) {
@@ -13,7 +13,7 @@ function Search( {setCountriesIds, countriesIds} ) {
     const dispatch = useDispatch()
 
     useEffect(() => {
-        search.length > 0 ? dispatch(getCountries(search)) : ''
+        search.length > 0 ? dispatch(getCountries(search)) : dispatch(resetCountries())
     }, [search])
 
     // === Selectors ===

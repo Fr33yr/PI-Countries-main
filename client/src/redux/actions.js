@@ -3,12 +3,11 @@ import {
     GET_COUNTRIES, CREATE_ACTIVITY,
     GET_DETAILS, FILTER_BY_CONTINENT,
     FILTER_BY_ACTIVITY, SORTING, GET_ACTIVITIES,
-    FORM_ERROR, COUNTRIES_ERROR,
-    RESET_ERROR, ERROR
+    RESET_COUNTRIES, RESET_ERROR, ERROR
 } from './action.types'
 
 
-// Activities actions
+// === Activities actions ===
 const createActivity = (props) => {
     return async function (dispatch) {
         const { name, dificulty, duration, season, countriesIds } = props
@@ -35,7 +34,7 @@ const getAllActivities = () => {
     }
 }
 
-// Countries actions
+// === Countries actions ===
 const getCountries = (name) => {
     return async function (dispatch) {
         try {
@@ -72,6 +71,7 @@ const getDetails = (id) => {
     }
 }
 
+// === Filters actions ===
 const sortBy = (payload) => {
     return {
         type: SORTING,
@@ -100,14 +100,22 @@ const filterBy = (continent, activity) => {
     }
 }
 
+// === Resets ===
 const resetError = () => {
     return {
         type: RESET_ERROR,
     }
 }
 
+const resetCountries = () => {
+    return {
+        type: RESET_COUNTRIES
+    }
+}
+
 export {
     getCountries, createActivity,
     getDetails, sortBy, filterBy,
-    getAllActivities, resetError
+    getAllActivities, resetError,
+    resetCountries
 }

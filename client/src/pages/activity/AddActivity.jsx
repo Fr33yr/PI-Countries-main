@@ -26,7 +26,7 @@ export default function AddActivity() {
     }, [formValues])
 
     // === Selectors ===
-    const actErr = useSelector(state => state.activity)
+    const err = useSelector(state => state.error)
 
     // === Handlers ===
     const handleChange = (e) => {
@@ -47,7 +47,7 @@ export default function AddActivity() {
 
     return (
         <>
-            {actErr.message ? <FormError text={actErr.message} /> : ""}
+            {err ? <FormError text={err.code} /> : ""}
             <div className={styles.activities}>
                 <form className={styles.activityform} onSubmit={handleSubmit}>
 

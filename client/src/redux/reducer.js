@@ -1,8 +1,7 @@
 import {
-    GET_COUNTRIES, CREATE_ACTIVITY,
+    GET_COUNTRIES, RESET_COUNTRIES, CREATE_ACTIVITY,
     GET_DETAILS, SORTING, FILTER_BY_CONTINENT,
-    GET_ACTIVITIES, FORM_ERROR, COUNTRIES_ERROR,
-    RESET_ERROR, ERROR
+    GET_ACTIVITIES, RESET_ERROR, ERROR
 } from './action.types'
 
 const initialState = {
@@ -22,6 +21,12 @@ export default (state = initialState, action) => {
                 ...state,
                 countries: [...action.payload],
                 filteredCountries: [...action.payload]
+            }
+        
+        case RESET_COUNTRIES:
+            return{
+                ...state,
+                countries: initialState.countries
             }
 
         case GET_DETAILS:
@@ -100,16 +105,6 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 activities: [...action.payload]
-            }
-        case COUNTRIES_ERROR:
-            return {
-                ...state,
-                error: action.payload
-            }
-        case FORM_ERROR:
-            return {
-                ...state,
-                error: action.payload
             }
         case ERROR:
             return{
