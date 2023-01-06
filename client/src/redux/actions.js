@@ -1,9 +1,10 @@
 import axios from 'axios'
 import {
-    GET_COUNTRIES,
-    CREATE_ACTIVITY,
+    GET_COUNTRIES, CREATE_ACTIVITY,
     GET_DETAILS, FILTER_BY_CONTINENT,
-    FILTER_BY_ACTIVITY, SORTING, GET_ACTIVITIES
+    FILTER_BY_ACTIVITY, SORTING, GET_ACTIVITIES,
+    FORM_ERROR, COUNTRIES_ERROR,
+    RESET_ERROR, ERROR
 } from './action.types'
 
 
@@ -18,20 +19,18 @@ const createActivity = (props) => {
             dispatch({ type: CREATE_ACTIVITY, payload: response.data })
         })
             .catch((error) => {
-                dispatch({type: CREATE_ACTIVITY, payload: error.response.data})
+                dispatch({ type: ERROR, payload: error.response.data })
             });
     }
 }
 
 const getAllActivities = () => {
     return async function (dispatch) {
-
-        const activities = await axios.get(`http://localhost:3001/activities`)
-
         try {
+            const activities = await axios.get(`http://localhost:3001/activities`)
             dispatch({ type: GET_ACTIVITIES, payload: activities.data })
         } catch (error) {
-            return error
+            dispatch({ type: ERROR, payload: error })
         }
     }
 }
@@ -39,18 +38,22 @@ const getAllActivities = () => {
 // Countries actions
 const getCountries = (name) => {
     return async function (dispatch) {
-        if (!name) {
-            const countries = await axios.get(`http://localhost:3001/countries/`)
-            return dispatch({
-                type: GET_COUNTRIES,
-                payload: countries.data
-            })
-        } else {
-            const countries = await axios.get(`http://localhost:3001/countries?name=${name}`)
-            return dispatch({
-                type: GET_COUNTRIES,
-                payload: countries.data
-            })
+        try {
+            if (!name) {
+                const countries = await axios.get(`http://localhost:3001/countries/`)
+                return dispatch({
+                    type: GET_COUNTRIES,
+                    payload: countries.data
+                })
+            } else {
+                const countries = await axios.get(`http://localhost:3001/countries?name=${name}`)
+                return dispatch({
+                    type: GET_COUNTRIES,
+                    payload: countries.data
+                })
+            }
+        } catch (error) {
+            dispatch({ type: ERROR, payload: error })
         }
     }
 }
@@ -63,7 +66,9 @@ const getDetails = (id) => {
                 type: GET_DETAILS,
                 payload: d
             }))
-            .catch(err => console.log(err))
+            .catch(err => {
+                dispatch({ type: ERROR, payload: err.data })
+            })
     }
 }
 
@@ -95,4 +100,14 @@ const filterBy = (continent, activity) => {
     }
 }
 
-export { getCountries, createActivity, getDetails, sortBy, filterBy, getAllActivities }
+const resetError = () => {
+    return {
+        type: RESET_ERROR,
+    }
+}
+
+export {
+    getCountries, createActivity,
+    getDetails, sortBy, filterBy,
+    getAllActivities, resetError
+}
