@@ -34,7 +34,7 @@ export default function Countries() {
             <div className={styles.countriescontainer}>
                 {filteredCountries.length > 0 &&
                     filteredCountries.map((item, index) => (
-                        <Card {...item} key={item.id} />
+                        <Card {...item} key={`card-${item.id}`} />
                     ))}
             </div>
         </>
