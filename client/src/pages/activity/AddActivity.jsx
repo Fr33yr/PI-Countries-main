@@ -77,7 +77,7 @@ export default function AddActivity() {
                     </div>
 
                     {/* === Season input === */}
-                    <label htmlFor="">Season</label>
+                    <label htmlFor="season">Season</label>
                     <select name='season' value={formValues.season}
                         onChange={handleChange} className={styles.seasoninput}>
                         {seasonsOptions.map((season, index) => (
@@ -89,7 +89,7 @@ export default function AddActivity() {
 
                     <button type="submit" disabled={isDisabled}
                         className={styles.submitbtn}
-                    >Crear</button>
+                    >Create activity</button>
                 </form>
 
                 {/* === Search country === */}
