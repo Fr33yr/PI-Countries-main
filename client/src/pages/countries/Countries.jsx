@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import styles from './countries.module.css'
 
-import { getCountries, getAllActivities } from '../../redux/actions'
-import { Filters, Card } from '../../components/index'
+import { getCountries, getAllActivities, resetError } from '../../redux/actions'
+import { Filters, Card, PageError } from '../../components/index'
 
 
 export default function Countries() {
@@ -12,6 +12,7 @@ export default function Countries() {
 
 
     useEffect(() => {
+        dispatch(resetError())
         dispatch(getAllActivities())
         if (name !== undefined || name !== '') {
             dispatch(getCountries(name))
@@ -23,12 +24,13 @@ export default function Countries() {
 
     //selectors
     const filteredCountries = useSelector(state => state.filteredCountries)
-    const countries = useSelector(state => state.countries)
+    const err = useSelector(state => state.error)
 
 
     return (
         <>
             <Filters name={name} setName={setName} />
+            {err.code !== ''? <PageError text={err.code}/> : ''}
             <div className={styles.countriescontainer}>
                 {filteredCountries.length > 0 &&
                     filteredCountries.map((item, index) => (

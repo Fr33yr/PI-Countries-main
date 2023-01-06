@@ -24,7 +24,7 @@ function Filters({name, setName}) {
     return (
         <>
             <div className={styles.filters}>
-                <input type="text" name="name" onChange={handleName}/>
+                <input type="text" name="name" onChange={handleName} autoComplete='off'/>
                 <select name="contients" onChange={handleFilterByContinent}>
                     {continentOptions.map((c,index) => (
                         <option value={c} key={index}>{c}</option>

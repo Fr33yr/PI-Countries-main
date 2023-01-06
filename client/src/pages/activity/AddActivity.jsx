@@ -5,7 +5,7 @@ import { faStar } from '@fortawesome/free-regular-svg-icons'
 import { faStar as solidFaStar } from '@fortawesome/free-solid-svg-icons'
 
 import styles from './addactivity.module.css'
-import { createActivity } from '../../redux/actions'
+import { createActivity, resetError } from '../../redux/actions'
 import { Search, FormError } from '../../components/index'
 import { seasonsOptions } from '../../utils/options'
 
@@ -36,6 +36,7 @@ export default function AddActivity() {
     }
     const handleSubmit = (e) => {
         e.preventDefault()
+        dispatch(resetError())
         dispatch(createActivity({
             ...formValues,
             countriesIds
