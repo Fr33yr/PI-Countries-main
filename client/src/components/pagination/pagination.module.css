@@ -1,0 +1,13 @@
+.pagination{
+    display: flex;
+    flex-direction: row;
+    margin: 2rem 0 0 0;
+}
+
+.pagination p{
+    margin: 0 .4rem;
+}
+
+.pagination button{
+    margin: 0 1.2rem;
+}
