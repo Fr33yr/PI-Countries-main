@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import styles from './countries.module.css'
 
 import { getCountries, getAllActivities, resetError } from '../../redux/actions'
-import { Filters, Card, PageError } from '../../components/index'
+import { Filters, Card, PageError, Pagination } from '../../components/index'
 
 
 export default function Countries() {
@@ -30,13 +30,15 @@ export default function Countries() {
     return (
         <>
             <Filters name={name} setName={setName} />
-            {err.code !== ''? <PageError text={err.code}/> : ''}
+            {err.code !== '' ? <PageError text={err.code} /> : ''}
+            {filteredCountries.length > 0 ? <Pagination /> : ""}
             <div className={styles.countriescontainer}>
                 {filteredCountries.length > 0 &&
                     filteredCountries.map((item, index) => (
                         <Card {...item} key={`card-${item.id}`} />
                     ))}
             </div>
+            {filteredCountries.length > 0 ? <Pagination /> : ""}
         </>
     )
 }
