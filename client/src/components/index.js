@@ -7,5 +7,6 @@ export { default as Filters } from './filters/Filters';
 export { default as Layout } from './layout/Layout';
 export { default as Footer } from './layout/footer/Footer';
 export { default as Nav } from './layout/navbar/Nav';
+export { default as Pagination } from './pagination/Pagination';
 export { default as Search } from './search/Search';
 export { default as SearchResult } from './search/searchresult/SearchResult';
