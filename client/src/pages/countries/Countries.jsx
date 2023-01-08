@@ -25,7 +25,7 @@ export default function Countries() {
     //selectors
     const filteredCountries = useSelector(state => state.filteredCountries)
     const err = useSelector(state => state.error)
-
+console.table(filteredCountries);
 
     return (
         <>
@@ -34,7 +34,7 @@ export default function Countries() {
             {filteredCountries.length > 0 ? <Pagination /> : ""}
             <div className={styles.countriescontainer}>
                 {filteredCountries.length > 0 &&
-                    filteredCountries.map((item, index) => (
+                    filteredCountries.map((item) => (
                         <Card {...item} key={`card-${item.id}`} />
                     ))}
             </div>

@@ -16,6 +16,10 @@ function Filters({name, setName}) {
         const value = e.target.value
         dispatch(filterBy(value, null))
     }
+    const handleFilterByActivity = (e) => {
+        const value = e.target.value
+        dispatch(filterBy(null, value))
+    }
     const handleName = (e) => {
         const value = e.target.value
         setName(value)
@@ -32,13 +36,14 @@ function Filters({name, setName}) {
                 {/* === Filter by continent === */}
                 <select name="contients" onChange={handleFilterByContinent}>
                     {continentOptions.map((c,index) => (
-                        <option value={c} key={index}>{c}</option>
+                        <option value={c} key={`${index}-contient-option`}>{c}</option>
                     ))}
                 </select>
                 {/* === Filter by activity === */}
-                <select name="activities">
+                <select name="activities" onChange={handleFilterByActivity}>
                     {activities.length > 0 ? activities.map((activity) => (
-                        <option key={`activity-${activity.id}`}>{activity.name}</option>
+                        <option key={`activity-${activity.id+1}`}
+                        value={activity.name}>{activity.name}</option>
                     )) : <option>---</option>}
                 </select>
                 {/* === Sort options === */}
@@ -47,8 +52,9 @@ function Filters({name, setName}) {
                     {sortfiltersOptions.map((item, index) => {
                         return(
                             <>
-                                <label htmlFor={item}>{item}</label>
-                                <input type="radio" name='sort' value={item}/>
+                                <label htmlFor={item} key={`${index+2}-sortLabel`}>{item}</label>
+                                <input type="radio" name='sort' value={item}
+                                key={`${index+3}-sortInput`}/>
                             </>
                         )
                     })}

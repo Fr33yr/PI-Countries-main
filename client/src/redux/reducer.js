@@ -1,7 +1,7 @@
 import {
     GET_COUNTRIES, RESET_COUNTRIES, CREATE_ACTIVITY,
     GET_DETAILS, SORTING, FILTER_BY_CONTINENT,
-    GET_ACTIVITIES, RESET_ERROR, ERROR
+    GET_ACTIVITIES, RESET_ERROR, ERROR, FILTER_BY_ACTIVITY
 } from './action.types'
 
 const initialState = {
@@ -54,6 +54,13 @@ export default (state = initialState, action) => {
                     ...state,
                     filteredCountries: [...state.countries]
                 }
+            }
+        
+        case FILTER_BY_ACTIVITY:
+            return{
+                ...state,
+                filteredCountries: state.activities.filter((activity) => activity.name === action.payload)
+                .map((c) => c.countries)[0]
             }
 
         case SORTING:
