@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import { getAllActivities, getDetails } from '../../redux/actions'
@@ -7,10 +7,10 @@ export default function Detail() {
     const params = useParams()
     const dispatch = useDispatch()
 
-    useEffect(()=>{
+    useEffect(() => {
         dispatch(getDetails(params.id))
         dispatch(getAllActivities())
-    },[])
+    }, [])
 
     //selectors
     const countryDetails = useSelector(state => state.countryDetail)
@@ -19,8 +19,8 @@ export default function Detail() {
     return (
         <>
             <div className="countrydetail">
-                <img src={"not image found"} 
-                alt="flag" height={200} width={200} />
+                <img src={"not image found"}
+                    alt="flag" height={200} width={200} />
                 <h2>{countryDetails.name}</h2>
                 <h3>{countryDetails.id}</h3>
                 <ul>
@@ -30,7 +30,18 @@ export default function Detail() {
                     <li>Poblacion: {countryDetails.population}</li>
                 </ul>
                 <div>
-                    actividades turisticas
+                    {activities.length > 0 ? activities.map((activity) => (
+                        {
+                            name: activity.name,
+                            countries: activity.countries.map(country => country.id)
+                        }
+                    )).
+                        filter(activity => activity.countries.includes(params.id))
+                        .map((activity) => (
+                            <p>{activity.name}</p>
+                        ))
+                        :
+                        "No se encontaron actividades"}
                 </div>
             </div>
         </>
