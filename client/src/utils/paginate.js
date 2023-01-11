@@ -4,7 +4,7 @@
 // 3. arr = array de cards que recibe la funcion
 
 export function Paginate(arr, cardsPerPage, firstPageCards) {
-    if (arr.length <= firstPageCards) {
+    if (arr.length <= firstPageCards || arr.length <= cardsPerPage) {
         return arr
     } else {
         let fisrtPage = [] // array de cartas que corresponde a la primer pagina
