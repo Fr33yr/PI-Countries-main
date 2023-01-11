@@ -18,7 +18,7 @@ const createActivity = (props) => {
             dispatch({ type: CREATE_ACTIVITY, payload: response.data })
         })
             .catch((error) => {
-                dispatch({ type: ERROR, payload: error.response.data })
+                dispatch({ type: ERROR, payload: error })
             });
     }
 }
