@@ -12,9 +12,6 @@ export default function Countries() {
     const [name, setName] = useState('')
     const [currentIndex, setCurrentIndex] = useState(0)
     const dispatch = useDispatch()
-    
-    const cardsPerPage = 10
-    const cardsFirstPage = 9
 
     useEffect(() => {
         dispatch(resetError())
@@ -28,13 +25,17 @@ export default function Countries() {
         }
     }, [name])
 
-
-    //selectors
+    // === Selectors ===
     const filteredCountries = useSelector(state => state.filteredCountries)
     const err = useSelector(state => state.error)
 
-    let nPages = Array.isArray(Paginate(filteredCountries, cardsPerPage, cardsFirstPage)[0]) ? 
-    Paginate(filteredCountries, cardsPerPage, cardsFirstPage).length - 1 : 0
+    // === Pagination constants ===
+    const cardsPerPage = 10
+    const cardsFirstPage = 9
+    // === Pages ===
+    let pages = Paginate(filteredCountries, cardsPerPage, cardsFirstPage)[currentIndex]
+    let page = Paginate(filteredCountries, cardsPerPage, cardsFirstPage)
+    let nPages = Array.isArray(page[0]) ? page.length - 1 : 0
 
     return (
         <>
@@ -45,9 +46,9 @@ export default function Countries() {
                 setCurrentIndex={setCurrentIndex}  nPages={nPages}/>}
             {/* === Cards === */}
             <div className={styles.countriescontainer}>
-                {nPages > 0 ? Paginate(filteredCountries, cardsPerPage, cardsFirstPage)[currentIndex].map((country) => (
+                {nPages > 0 ? pages.map((country) => (
                     <Card {...country} key={country.id}/>
-                )) : Paginate(filteredCountries, cardsPerPage, cardsFirstPage).map((country) => (
+                )) : page.map((country) => (
                     <Card {...country} key={country.id}/>
                 ))
                 }
