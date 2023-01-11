@@ -4,23 +4,27 @@ import { useDispatch, useSelector } from 'react-redux'
 import { sortBy, filterBy } from '../../redux/actions'
 import {continentOptions, sortfiltersOptions} from '../../utils/options'
 
-function Filters({name, setName}) {
+function Filters({setName, setCurrentIndex}) {
     const dispatch = useDispatch()
 
     // === Handlers ===
     const handleSort = (e) => {
+        setCurrentIndex(0)
         const value = e.target.value
         dispatch(sortBy(value))
     }
     const handleFilterByContinent = (e) => {
+        setCurrentIndex(0)
         const value = e.target.value
         dispatch(filterBy(value, null))
     }
     const handleFilterByActivity = (e) => {
+        setCurrentIndex(0)
         const value = e.target.value
         dispatch(filterBy(null, value))
     }
     const handleName = (e) => {
+        setCurrentIndex(0)
         const value = e.target.value
         setName(value)
     }
