@@ -1,3 +1,4 @@
+export { default as ActivityDetail } from './activitydetail/ActivityDetail';
 export { default as DetailButton } from './buttons/detailButton/DetailButton';
 export { default as SubmitButton } from './buttons/submitButton/SubmitButton';
 export { default as Card } from './card/Card';
