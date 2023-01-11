@@ -14,12 +14,11 @@ export default function Detail() {
 
     //selectors
     const countryDetails = useSelector(state => state.countryDetail)
-    const activities = useSelector(state => state.activities)
 
     return (
         <>
             <div className="countrydetail">
-                <img src={"not image found"}
+                <img src={countryDetails.images[0] || "not image found"}
                     alt="flag" height={200} width={200} />
                 <h2>{countryDetails.name}</h2>
                 <h3>{countryDetails.id}</h3>
@@ -30,18 +29,13 @@ export default function Detail() {
                     <li>Poblacion: {countryDetails.population}</li>
                 </ul>
                 <div>
-                    {activities.length > 0 ? activities.map((activity) => (
-                        {
-                            name: activity.name,
-                            countries: activity.countries.map(country => country.id)
-                        }
-                    )).
-                        filter(activity => activity.countries.includes(params.id))
-                        .map((activity) => (
-                            <p>{activity.name}</p>
-                        ))
-                        :
-                        "No se encontaron actividades"}
+                    {countryDetails.activities.length > 0 ? countryDetails.activities.map((activity) => (
+                        <>
+                            <p>Activity: {activity.name}</p>
+                            <p>Dificulty: {activity.dificulty}</p>
+                            <p>Season: {activity.season}</p>
+                        </>
+                    )) : "No hay actividades"}
                 </div>
             </div>
         </>
