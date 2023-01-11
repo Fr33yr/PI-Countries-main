@@ -1,7 +1,7 @@
 import styles from './filters.module.css'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { sortBy, filterBy } from '../../redux/actions'
+import { sortBy, filterBy, resetFilters } from '../../redux/actions'
 import {continentOptions, sortfiltersOptions} from '../../utils/options'
 
 function Filters({setName, setCurrentIndex}) {
@@ -27,6 +27,9 @@ function Filters({setName, setCurrentIndex}) {
         setCurrentIndex(0)
         const value = e.target.value
         setName(value)
+    }
+    const handleFilterReset = () => {
+        dispatch(resetFilters())
     }
 
     // === Selectors ===
@@ -63,6 +66,9 @@ function Filters({setName, setCurrentIndex}) {
                         )
                     })}
                 </fieldset>
+                <button onClick={handleFilterReset}>
+                    Reset
+                </button>
             </div>
         </>
     )

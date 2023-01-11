@@ -1,7 +1,8 @@
 import {
     GET_COUNTRIES, RESET_COUNTRIES, CREATE_ACTIVITY,
     GET_DETAILS, SORTING, FILTER_BY_CONTINENT,
-    GET_ACTIVITIES, RESET_ERROR, ERROR, FILTER_BY_ACTIVITY
+    GET_ACTIVITIES, RESET_ERROR, ERROR, FILTER_BY_ACTIVITY,
+    RESET_FILTERS
 } from './action.types'
 
 const initialState = {
@@ -22,9 +23,9 @@ export default (state = initialState, action) => {
                 countries: [...action.payload],
                 filteredCountries: [...action.payload]
             }
-        
+
         case RESET_COUNTRIES:
-            return{
+            return {
                 ...state,
                 countries: initialState.countries
             }
@@ -55,12 +56,12 @@ export default (state = initialState, action) => {
                     filteredCountries: [...state.countries]
                 }
             }
-        
+
         case FILTER_BY_ACTIVITY:
-            return{
+            return {
                 ...state,
                 filteredCountries: state.activities.filter((activity) => activity.name === action.payload)
-                .map((c) => c.countries)[0]
+                    .map((c) => c.countries)[0]
             }
 
         case SORTING:
@@ -108,13 +109,19 @@ export default (state = initialState, action) => {
                     })
                 }
             }
+        case RESET_FILTERS:
+            return {
+                ...state,
+                filteredCountries: state.countries
+            }
+
         case GET_ACTIVITIES:
             return {
                 ...state,
                 activities: [...action.payload]
             }
         case ERROR:
-            return{
+            return {
                 ...state,
                 error: action.payload
             }

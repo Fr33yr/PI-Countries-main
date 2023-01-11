@@ -3,7 +3,7 @@ import {
     GET_COUNTRIES, CREATE_ACTIVITY,
     GET_DETAILS, FILTER_BY_CONTINENT,
     FILTER_BY_ACTIVITY, SORTING, GET_ACTIVITIES,
-    RESET_COUNTRIES, RESET_ERROR, ERROR
+    RESET_COUNTRIES, RESET_ERROR, ERROR, RESET_FILTERS
 } from './action.types'
 
 
@@ -113,9 +113,15 @@ const resetCountries = () => {
     }
 }
 
+const resetFilters = () => {
+    return{
+        type: RESET_FILTERS
+    }
+}
+
 export {
     getCountries, createActivity,
     getDetails, sortBy, filterBy,
     getAllActivities, resetError,
-    resetCountries
+    resetCountries, resetFilters
 }
