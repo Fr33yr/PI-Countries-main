@@ -47,7 +47,7 @@ export default function AddActivity() {
 
     return (
         <>
-            {err ? <FormError text={err.code} /> : ""}
+            {err.code !== '' > 0 ? <FormError text={err.code} /> : ""}
             <div className={styles.activities}>
                 <form className={styles.activityform} onSubmit={handleSubmit}>
 
