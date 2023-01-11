@@ -11,3 +11,12 @@
 .pagination button{
     margin: 0 1.2rem;
 }
+
+.pagination button:disabled{
+    display: none;
+}
+
+.currentPage{
+    border: 2px solid var(--font-clr-complementary);
+    padding: 0 .3rem;
+}
