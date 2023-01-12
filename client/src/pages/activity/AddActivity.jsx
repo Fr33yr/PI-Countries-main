@@ -13,7 +13,7 @@ export default function AddActivity() {
     // === Local state ===
     const formInitialState = { name: '', dificulty: 1, duration: 1, season: '' }
     const [formValues, setFormValues] = useState({ ...formInitialState })
-    const [countriesIds, setCountriesIds] = useState([])
+    const [selectedCountries, setSelectedCountries] = useState([])
     const [isDisabled, setIsDisabled] = useState(false)
     const dispatch = useDispatch()
 
@@ -39,10 +39,10 @@ export default function AddActivity() {
         dispatch(resetError())
         dispatch(createActivity({
             ...formValues,
-            countriesIds
+            countriesIds: selectedCountries.map(c => c.id)
         }))
         setFormValues({ ...formInitialState })
-        setCountriesIds([])
+        setSelectedCountries([])
     }
 
     return (
@@ -94,7 +94,8 @@ export default function AddActivity() {
 
                 {/* === Search country === */}
                 <div className="">
-                    <Search countriesIds={countriesIds} setCountriesIds={setCountriesIds}/>
+                    <Search selectedCountries={selectedCountries} 
+                    setSelectedCountries={setSelectedCountries}/>
                 </div>
             </div>
         </>

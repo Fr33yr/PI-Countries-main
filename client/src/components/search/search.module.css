@@ -16,3 +16,17 @@
     align-items: flex-start;
     justify-content: flex-start;
 }
+
+.countryoption{
+    display: flex;
+    flex-direction: row;
+}
+
+.selectedcountry{
+    margin: 1rem;
+    padding: .1rem .5rem;
+    border: 2px solid var(--font-clr-complementary);
+    max-width: fit-content;
+    display: flex;
+    flex-direction: row;
+}

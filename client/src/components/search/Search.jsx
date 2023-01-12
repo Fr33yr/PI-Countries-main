@@ -4,10 +4,9 @@ import { useSelector, useDispatch } from 'react-redux'
 import { getCountries, resetCountries } from '../../redux/actions'
 import styles from './search.module.css'
 
-function Search( {setCountriesIds, countriesIds} ) {
+function Search( {setSelectedCountries, selectedCountries} ) {
     // === Local state ===
     const [search, setSearch] = useState('')
-    const [selectedCountries, setSelectedCountries] = useState([])
     const [selected, setSelected] = useState(false)
 
     const dispatch = useDispatch()
@@ -24,8 +23,11 @@ function Search( {setCountriesIds, countriesIds} ) {
         setSearch(e.target.value)
     }
     const handleAddCountry = (country) => {
-        setCountriesIds(countriesIds.concat([country.id]))
         setSelectedCountries(selectedCountries.concat([country]))
+    }
+    const handleRemoveCountry = (country) => {
+        const {id} = country
+        setSelectedCountries(selectedCountries.filter(country => country.id !== id))
     }
 
     return (
@@ -40,9 +42,10 @@ function Search( {setCountriesIds, countriesIds} ) {
                     {countries.map((country, index) => {
                         return (
                             <>
-                                <div>
+                                <div className={styles.countryoption}>
                                     <p>{country.name}</p>
-                                    <button onClick={()=>handleAddCountry(country)}>+</button>
+                                    <button onClick={()=>handleAddCountry(country)}
+                                    disabled={selectedCountries.includes(country.id)}>+</button>
                                 </div>
                             </>
                         )
@@ -52,9 +55,10 @@ function Search( {setCountriesIds, countriesIds} ) {
                 {
                     selectedCountries.length > 0 ? selectedCountries.map((country, index) => {
                         return (
-                            <>
-                                <p>{country.name}</p>
-                            </>
+                            <div className={styles.selectedcountry}>
+                                <h3>{country.name}</h3>
+                                <button onClick={()=>handleRemoveCountry(country)}>-</button>
+                            </div>
                         )
                     }) : ""
                 }
